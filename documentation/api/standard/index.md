@@ -32,9 +32,9 @@ As previously mentioned, we keep the speech-to-text dictionary small to improve 
 
 In terms of code, the interface requests a list of single-word strings called `WORDS` that sits in the module's global namespace. For _Life.py_, we have the following:
 
-```
+{% highlight python %}
 WORDS = ["MEANING", "OF", "LIFE"]
-```
+{% endhighlight %}
 
 If your module doesn't require any keywords, leave `WORDS = []` in the code.
 
@@ -46,10 +46,10 @@ In terms of code, the interface requests a method `isValid(input)` that returns 
 
 For _Life.py_, we just want the user input to contain some variation of "meaning of life", such as "What's the meaning of life?" or "Tell me the meaning of life", which we accomplish as follows:
 
-```
+{% highlight python %}
 def isValid(input):
     return bool(re.search(r'\bmeaning of life\b', input, re.IGNORECASE))
-```
+{% endhighlight %}
 
 Any word used in the `isValid` method should be included in the `WORDS` dictionary. How can you detect a word if the speech-to-text system never identifies it?
 
@@ -59,7 +59,7 @@ This is the heart of the module: you know you've been passed valid input, so wha
 
 In _Life.py_, we simply spout out a response:
 
-```
+{% highlight python %}
 def handle(input, mic, profile):
     messages = ["It's 42, you idiot.",
                 "It's 42. How many times do I have to tell you?"]
@@ -67,7 +67,7 @@ def handle(input, mic, profile):
     message = random.choice(messages)
 
     mic.say(message)
-```
+{% endhighlight %}
 
 ## User Interaction
 
@@ -86,18 +86,18 @@ All modules have complete access to `profile`, the user's profile. This allows y
 
 A good example of using the user profile can be found in _Time.py_, where we take note of the user's timezone when reading off the time:
 
-```
+{% highlight python %}
 def handle(input, mic, profile):
     user_tz = getTimezone(profile)
     now = datetime.datetime.now(tz=user_tz)
     response = now.strftime("%I:%M %p")
     mic.say("It is %s right now." % (response))
-```
+{% endhighlight %}
 
 The profile is also useful for accessing permissions tokens, passwords, and more. In _Birthday.py_, we grab the user's Facebook permissions token from the profile in order to find out their friends' birthdays:
 
-```
+{% highlight python %}
 def handle(input, mic, profile):
     oauth_access_token = profile['keys']["FB_TOKEN"]
     ...
-```
+{% endhighlight %}
