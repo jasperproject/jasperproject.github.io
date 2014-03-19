@@ -4,7 +4,7 @@ layout: default
 currentpage: api
 ---
 
-How to create a Jasper standard module
+How to create a standard Jasper module
 ===
 
 Augmenting Jasper with a new module is a fairly simple process. With just a few lines of code, you can have Jasper telling you the weather, sending you the top headlines, etc.
