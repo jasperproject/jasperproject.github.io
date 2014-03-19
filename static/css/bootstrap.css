@@ -1464,7 +1464,7 @@ pre code {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 600px) {
   .col-lg-1,
   .col-lg-2,
   .col-lg-3,
