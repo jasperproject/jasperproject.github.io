@@ -116,7 +116,7 @@ a:after {
 
 i {
 	margin: 8px;
-	color: #000; 
+	color: #000;
 }
 
 
@@ -130,7 +130,7 @@ i {
 	background-position: center center;
 	min-height: 650px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -154,33 +154,9 @@ i {
 .navbar-right {
     font-weight:bold;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.nav-sidebar { 
+.nav-sidebar {
     width: 100%;
-    padding: 8px 0; 
+    padding: 8px 0;
     border-right: 1px solid #ddd;
 }
 .nav-sidebar a {
@@ -189,35 +165,35 @@ i {
     -moz-transition: all 0.08s linear;
     -o-transition: all 0.08s linear;
     transition: all 0.08s linear;
-    -webkit-border-radius: 4px 0 0 4px; 
-    -moz-border-radius: 4px 0 0 4px; 
-    border-radius: 4px 0 0 4px; 
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
     font-weight:bold;
 }
-.nav-sidebar .active a { 
+.nav-sidebar .active a {
     cursor: default;
-    background-color: #000; 
-    color: #fff; 
-    text-shadow: 1px 1px 1px #666; 
+    background-color: #000;
+    color: #fff;
+    text-shadow: 1px 1px 1px #666;
 }
 .nav-sidebar .active a:hover {
-    background-color: #000;   
+    background-color: #000;
 }
 .nav-sidebar .text-overflow a,
 .nav-sidebar .text-overflow .media-body {
     white-space: nowrap;
     overflow: hidden;
     -o-text-overflow: ellipsis;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 /* Right-aligned sidebar */
-.nav-sidebar.pull-right { 
-    border-right: 0; 
-    border-left: 1px solid #ddd; 
+.nav-sidebar.pull-right {
+    border-right: 0;
+    border-left: 1px solid #ddd;
 }
 .nav-sidebar.pull-right a {
-    -webkit-border-radius: 0 4px 4px 0; 
-    -moz-border-radius: 0 4px 4px 0; 
-    border-radius: 0 4px 4px 0; 
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
 }

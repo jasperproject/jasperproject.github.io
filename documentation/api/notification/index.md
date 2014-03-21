@@ -18,10 +18,10 @@ As Notification modules run in the background, they require their own threads. A
 
 Each Notification module module is wrapped in a `NotificationClient`. The notification client stores two instance variables: a method `gather` that queues up notifications, and some sort of timestamp argument `timestamp`. The requirement is that `gather` returns a new value for `timestamp`, as exhibited by the `run` method:
 
-```
+{% highlight python %}
 def run(self):
     self.timestamp = self.gather(self.timestamp)
-```
+{% endhighlight %}
 
 For example, with email, the timestamp argument is the time of the most recent email seen. On each iteration, we return an updated timestamp to make sure we don't report new emails multiple times.
 
@@ -38,7 +38,7 @@ For each `NotificationClient`, you need to provide a method that:
 
 For example, we have the following method for checking email:
 
-```
+{% highlight python %}
 def handleEmailNotifications(self, lastDate):
     # grab emails
     emails = Gmail.fetchUnreadEmails(self.profile, since=lastDate)
@@ -55,14 +55,14 @@ def handleEmailNotifications(self, lastDate):
 
     # return timestamp of most recent email
     return lastDate
-```
+{% endhighlight %}
 
 To run this Notification module on start-up, we'd then have to amend `self.notifiers` to include a new `NotificationClient` with the function `handleEmailNotifications` as its `gather` and `None` as its initial timestamp. The exact code:
 
-```
+{% highlight python %}
 self.notifiers = [
     self.NotificationClient(self.handleEmailNotifications, None)]
-```
+{% endhighlight %}
 
 ## Conclusion
 
