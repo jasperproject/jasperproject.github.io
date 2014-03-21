@@ -9,13 +9,13 @@ Software Guide
 
 You can choose from one of two ways to install Jasper's software on your Raspberry Pi.
 
-<hr>
+-
 
 Method 1: Quick Start (Recommended)
 ===
 The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "Configuring Jasper Client". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
 
-<hr>
+-
 
 Method 2: Manual Installation
 ===
