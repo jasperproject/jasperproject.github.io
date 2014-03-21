@@ -27,7 +27,7 @@ Burn Raspbian image onto SD card
 
 We'll first clear the SD card using Gparted on Ubuntu, but you can use an equivalent utility or operating system. In Gparted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
 
-Download Raspbian Wheezy: [2013-12-20-wheezy-raspbian.zip](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2013-12-20 release, newer releases may also work.
+Download Raspbian Wheezy from [http://downloads.raspberrypi.org/raspbian_latest](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2014-01-07 release, newer releases may also work.
 
 We'll use dd to burn the image to the disk. Obtain the address of the SD card with:
 
