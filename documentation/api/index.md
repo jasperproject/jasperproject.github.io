@@ -19,4 +19,3 @@ The interaction here is _active_: users initiate contact with Jasper and ask it 
 ## [Notification module](/documentation/api/notification)
 
 The interaction here is _passive_: Jasper will do some silent monitoring of some information stream (e.g., checking Twitter or email) and speak when there is something important to report.
-
