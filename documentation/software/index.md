@@ -220,7 +220,7 @@ Jasper requires various Python libraries that we can install with:
 sudo pip install -r jasper-client/client/requirements.txt # should include six apscheduler python-mpd
 {% endhighlight %}
 
-Run {% highlight bash %}crontab -e{% endhighlight %}, then add the following lines:
+Run crontab -e, then add the following lines:
 
 {% highlight bash %}
 @reboot /home/pi/jasper/boot/boot.sh;
