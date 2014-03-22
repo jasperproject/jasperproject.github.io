@@ -9,14 +9,14 @@ Software Guide
 
 You can choose from one of two ways to install Jasper's software on your Raspberry Pi.
 
-<hr>
+-
 
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
 The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "Configuring Jasper Client". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
 
-<hr>
+-
 
 <h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 2: Manual Installation</a></h1>
 
@@ -27,7 +27,7 @@ Follow these instructions only if you wish to compile your Jasper software from 
 
 We'll first clear the SD card using Gparted on Ubuntu, but you can use an equivalent utility or operating system. In Gparted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
 
-Download Raspbian Wheezy: [2013-12-20-wheezy-raspbian.zip](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2013-12-20 release, newer releases may also work.
+Download Raspbian Wheezy from [http://downloads.raspberrypi.org/raspbian_latest](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2014-01-07 release, newer releases may also work.
 
 We'll use dd to burn the image to the disk. Obtain the address of the SD card with:
 
@@ -60,8 +60,6 @@ sudo raspi-config
 
 Run the following commands to update Pi and some install some useful tools.
 
-
-
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
@@ -87,7 +85,7 @@ Change the following line:
 options snd-usb-audio index=-2
 {% endhighlight %}
 
-to this:
+To this:
 
 {% highlight bash %}
 options snd-usb-audio index=0
@@ -111,24 +109,16 @@ Make sure you have speakers or headphones connected to the audio jack of your Pi
 aplay -D hw:1,0 temp.wav
 {% endhighlight %}
 
-Add the following line to the end of ~/.bash_profile:
-
-{% highlight bash %}
-export LD_LIBRARY_PATH="/usr/local/lib"
-{% endhighlight %}
-
 And this to your ~/.bashrc or ~/.bash_profile:
 
 {% highlight bash %}
 LD_LIBRARY_PATH="/usr/local/lib"
 export LD_LIBRARY_PATH
-
 PATH=$PATH:/usr/local/lib/
 export PATH
 {% endhighlight %}
 
 With that, we're ready to install the core software that powers Jasper.
-
 
 <h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx, CMUCLMTK, and Phonetisaurus</a></h2>
 
@@ -208,7 +198,7 @@ Then run:
 sudo ifconfig wlan0 192.168.42.1
 {% endhighlight %}
 
-Next, we install Jasper itself.
+Next, we will install Jasper itself.
 
 <h2 class="linked" id='install-jasper'><a href="#install-jasper" title="Permalink to this headline">Install Jasper</a></h2>
 
@@ -216,7 +206,7 @@ Next, we install Jasper itself.
 In the home directory of your Pi, clone the Jasper source code:
 
 {% highlight bash %}
-git clone https://github.com/shbhrsaha/jasper-client.git
+git clone https://github.com/shbhrsaha/jasper-client.git jasper
 {% endhighlight %}
 
 Jasper requires various Python libraries that we can install in one line with:
@@ -225,13 +215,7 @@ Jasper requires various Python libraries that we can install in one line with:
 sudo pip install -r jasper-client/client/requirements.txt
 {% endhighlight %}
 
-Rename:
-
-{% highlight bash %}
-mv jasper-client jasper
-{% endhighlight %}
-
-Edit your crontab with `crontab -e` and add:
+Run `crontab -e`, then add the following lines:
 
 {% highlight bash %}
 @reboot /home/pi/jasper/boot/boot.sh;
