@@ -31,11 +31,15 @@ Download Raspbian Wheezy: [2013-12-20-wheezy-raspbian.zip](http://downloads.rasp
 
 We'll use dd to burn the image to the disk. Obtain the address of the SD card with:
 
-    sudo fdisk -l
+{% highlight bash %}
+sudo fdisk -l
+{% endhighlight %}
 
 Our address was '/dev/mmcblk0', so the following command burns the image to the disk:
 
-    sudo dd if=2013-12-20-wheezy-raspbian.img of=/dev/mmcblk0 bs=2M
+{% highlight bash %}
+sudo dd if=2013-12-20-wheezy-raspbian.img of=/dev/mmcblk0 bs=2M
+{% endhighlight %}
 
 When it's done, remove your SD card, insert it into your Raspberry Pi and connect it to your computer via ethernet.
 
@@ -44,60 +48,84 @@ When it's done, remove your SD card, insert it into your Raspberry Pi and connec
 
 We're now going to do some basic housekeeping and install some of the required libraries. You should SSH into your Pi with a command similar to the following. The IP address usually falls in the 192.168.2.3-192.168.2.10 range.
 
-    ssh pi@192.168.2.3 # password (default): raspberry
+{% highlight bash %}
+ssh pi@192.168.2.3 # password (default): raspberry
+{% endhighlight %}
 
 Run the following, select to 'Expand Filesystem' and restart your Pi:
 
-    sudo raspi-config
+{% highlight bash %}
+sudo raspi-config
+{% endhighlight %}
 
 Run the following commands to update Pi and some install some useful tools.
 
-    sudo apt-get update
-    sudo apt-get upgrade --yes
-    sudo apt-get install vim --yes
-    sudo apt-get install git-core --yes
-    sudo apt-get install espeak --yes
-    sudo apt-get install python-dev --yes
-    sudo apt-get install python-pip --yes
-    sudo apt-get install bison --yes
-    sudo apt-get install libasound2-dev --yes
-    sudo apt-get install libportaudio-dev python-pyaudio --yes
+
+
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get upgrade --yes
+sudo apt-get install vim --yes
+sudo apt-get install git-core --yes
+sudo apt-get install espeak --yes
+sudo apt-get install python-dev --yes
+sudo apt-get install python-pip --yes
+sudo apt-get install bison --yes
+sudo apt-get install libasound2-dev --yes
+sudo apt-get install libportaudio-dev python-pyaudio --yes
+{% endhighlight %}
 
 Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
 
-    sudo vim /etc/modprobe.d/alsa-base.conf
+{% highlight bash %}
+sudo vim /etc/modprobe.d/alsa-base.conf
+{% endhighlight %}
 
 Change the following line:
 
-    options snd-usb-audio index=-2
+{% highlight bash %}
+options snd-usb-audio index=-2
+{% endhighlight %}
 
 to this:
 
-    options snd-usb-audio index=0
+{% highlight bash %}
+options snd-usb-audio index=0
+{% endhighlight %}
 
 Back in the shell, run:
 
-    alsa force-reload
+{% highlight bash %}
+alsa force-reload
+{% endhighlight %}
 
 Test that recording works with:
 
-    arecord temp.wav
+{% highlight bash %}
+arecord temp.wav
+{% endhighlight %}
 
 Make sure you have speakers or headphones connected to the audio jack of your Pi. You can play back the recorded file:
 
-    aplay -D hw:1,0 temp.wav
+{% highlight bash %}
+aplay -D hw:1,0 temp.wav
+{% endhighlight %}
 
 Add the following line to the end of ~/.bash_profile:
 
-    export LD_LIBRARY_PATH="/usr/local/lib"
+{% highlight bash %}
+export LD_LIBRARY_PATH="/usr/local/lib"
+{% endhighlight %}
 
 And this to your ~/.bashrc or ~/.bash_profile:
 
-    LD_LIBRARY_PATH="/usr/local/lib"
-    export LD_LIBRARY_PATH
+{% highlight bash %}
+LD_LIBRARY_PATH="/usr/local/lib"
+export LD_LIBRARY_PATH
 
-    PATH=$PATH:/usr/local/lib/
-    export PATH
+PATH=$PATH:/usr/local/lib/
+export PATH
+{% endhighlight %}
 
 With that, we're ready to install the core software that powers Jasper.
 
@@ -106,24 +134,30 @@ With that, we're ready to install the core software that powers Jasper.
 
 Jasper uses Pocketsphinx for voice recognition. Let's download and unzip sphinxbase and pocketsphinx:
 
-    wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
-    wget http://downloads.sourceforge.net/project/cmusphinx/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
-    tar -zxvf sphinxbase-0.8.tar.gz
-    tar -zxvf pocketsphinx-0.8.tar.gz
+{% highlight bash %}
+wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
+wget http://downloads.sourceforge.net/project/cmusphinx/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
+tar -zxvf sphinxbase-0.8.tar.gz
+tar -zxvf pocketsphinx-0.8.tar.gz
+{% endhighlight %}
 
 Now we build and install sphinxbase:
 
-    cd ~/sphinxbase-0.8/
-    ./configure --enable-fixed
-    make
-    sudo make install
+{% highlight bash %}
+cd ~/sphinxbase-0.8/
+./configure --enable-fixed
+make
+sudo make install
+{% endhighlight %}
 
 and pocketsphinx:
 
-    cd ~/pocketsphinx-0.8/
-    ./configure
-    make
-    sudo make install
+{% highlight bash %}
+cd ~/pocketsphinx-0.8/
+./configure
+make
+sudo make install
+{% endhighlight %}
 
 Restart your Pi.
 
@@ -132,37 +166,47 @@ Restart your Pi.
 
 To configure wireless:
 
-    sudo apt-get install dhcp3-server hostapd udhcpd
+{% highlight bash %}
+sudo apt-get install dhcp3-server hostapd udhcpd
+{% endhighlight %}
 
 Insert the following lines to the end of /etc/dhcp/dhcpd.conf:
 
-    ddns-update-style interim;
-    default-lease-time 600;
-    max-lease-time 7200;
-    authoritative;
-    log-facility local7;
-    subnet 192.168.1.0 netmask 255.255.255.0 {
-      range 192.168.1.5 192.168.1.150;
-    }
+{% highlight bash %}
+ddns-update-style interim;
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+log-facility local7;
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.5 192.168.1.150;
+}
+{% endhighlight %}
 
 And the following to the end of /etc/udhcpd.conf:
 
-    start 192.168.42.2 # This is the range of IPs that the hostspot will give to client devices.
-    end 192.168.42.20
-    interface wlan0 # The device uDHCP listens on.
-    remaining yes
-    opt dns 8.8.8.8 4.2.2.2 # The DNS servers client devices will use.
-    opt subnet 255.255.255.0
-    opt router 192.168.42.1 # The Pi's IP address on wlan0 which we will set up shortly.
-    opt lease 864000 # 10 day DHCP lease time in seconds
+{% highlight bash %}
+start 192.168.42.2 # This is the range of IPs that the hostspot will give to client devices.
+end 192.168.42.20
+interface wlan0 # The device uDHCP listens on.
+remaining yes
+opt dns 8.8.8.8 4.2.2.2 # The DNS servers client devices will use.
+opt subnet 255.255.255.0
+opt router 192.168.42.1 # The Pi's IP address on wlan0 which we will set up shortly.
+opt lease 864000 # 10 day DHCP lease time in seconds
+{% endhighlight %}
 
 Comment this line in sudo vim /etc/default/udhcpd:
 
-    #DHCPD_ENABLED="no"
+{% highlight bash %}
+#DHCPD_ENABLED="no"
+{% endhighlight %}
 
 Then run:
 
-    sudo ifconfig wlan0 192.168.42.1
+{% highlight bash %}
+sudo ifconfig wlan0 192.168.42.1
+{% endhighlight %}
 
 Next, we install Jasper itself.
 
@@ -171,46 +215,62 @@ Next, we install Jasper itself.
 
 In the home directory of your Pi, clone the Jasper source code:
 
-    git clone https://github.com/shbhrsaha/jasper-client.git
+{% highlight bash %}
+git clone https://github.com/shbhrsaha/jasper-client.git
+{% endhighlight %}
 
-Jasper requires various Python libraries that we can install with:
+Jasper requires various Python libraries that we can install in one line with:
 
-    sudo pip install -r jasper-client/client/requirements.txt
+{% highlight bash %}
+sudo pip install -r jasper-client/client/requirements.txt
+{% endhighlight %}
 
 Rename:
 
-    mv jasper-client jasper
+{% highlight bash %}
+mv jasper-client jasper
+{% endhighlight %}
 
-just crontab -e:
+Edit your crontab with `crontab -e` and add:
 
-    @reboot /home/pi/jasper/boot/boot.sh;
-    */1 * * * * ping -c 1 google.com
+{% highlight bash %}
+@reboot /home/pi/jasper/boot/boot.sh;
+*/1 * * * * ping -c 1 google.com
+{% endhighlight %}
 
 Copy /usr/local/bin binaries:
 
-    mkdir bin
-    scp * pi@192.168.2.3:./bin/
-    sudo cp * /usr/local/bin/
+{% highlight bash %}
+mkdir bin
+scp * pi@192.168.2.3:./bin/
+sudo cp * /usr/local/bin/
+{% endhighlight %}
 
-Copy /usr/local/lib
+Copy /usr/local/lib:
 
-    mkdir lib
-    scp * pi@192.168.2.3:./lib/
-    sudo cp * /usr/local/lib/
+{% highlight bash %}
+mkdir lib
+scp * pi@192.168.2.3:./lib/
+sudo cp * /usr/local/lib/
+{% endhighlight %}
 
-Copy the phonetisaurus folder to the home directory
+Copy the phonetisaurus folder to the home directory:
 
-    mkdir phonetisaurus
-    scp * pi@192.168.2.3:./phonetisaurus/
+{% highlight bash %}
+mkdir phonetisaurus
+scp * pi@192.168.2.3:./phonetisaurus/
+{% endhighlight %}
 
 Set permissions everywhere:
 
-    chmod 777 -R *
+{% highlight bash %}
+chmod 777 -R *
+{% endhighlight %}
 
 At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
 
 
-<h2 class="linked" id='configure-jasper'><a href="#configure-jasper" title="Permalink to this headline">Configuring Jasper Client</a></h2>
+<h2 class="linked" id='configure-jasper'><a href="#configure-jasper" title="Permalink to this headline">Configuring the Jasper Client</a></h2>
 
 
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
@@ -219,7 +279,9 @@ In order for Jasper to accurately report local weather conditions, send you text
 
 To facilitate the process, run the profile population module that comes packaged with Jasper
 
-    python populate.py
+{% highlight bash %}
+python populate.py
+{% endhighlight %}
 
 The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. The resulting profile will be stored as a [YML](http://fdik.org/yml/) file at _profile.yml_.
 
