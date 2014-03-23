@@ -63,14 +63,7 @@ Run the following commands to update Pi and some install some useful tools.
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
-sudo apt-get install vim --yes
-sudo apt-get install git-core --yes
-sudo apt-get install espeak --yes
-sudo apt-get install python-dev --yes
-sudo apt-get install python-pip --yes
-sudo apt-get install bison --yes
-sudo apt-get install libasound2-dev --yes
-sudo apt-get install libportaudio-dev python-pyaudio --yes
+sudo apt-get install vim git-core espeak python-dev python-pip bison libasound2-dev libportaudio-dev python-pyaudio --yes
 {% endhighlight %}
 
 Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
@@ -94,10 +87,10 @@ options snd-usb-audio index=0
 Back in the shell, run:
 
 {% highlight bash %}
-alsa force-reload
+sudo alsa force-reload
 {% endhighlight %}
 
-Test that recording works with:
+Test that recording works with. You may need to restart your Pi.
 
 {% highlight bash %}
 arecord temp.wav
@@ -113,6 +106,7 @@ Add the following line to the end of ~/.bash_profile:
 
 {% highlight bash %}
 export LD_LIBRARY_PATH="/usr/local/lib"
+source .bashrc
 {% endhighlight %}
 
 And this to ~/.bashrc:
@@ -126,10 +120,10 @@ export PATH
 {% endhighlight %}
 
 
-Install Pocketsphinx, CMUCLMTK, and Phonetisaurus
--------------------------------------------------
+Install Pocketsphinx
+--------------------
 
-Jasper uses Pocketsphinx for voice recognition. Let's download and unzip sphinxbase and pocketsphinx:
+Jasper uses Pocketsphinx for voice recognition. Let's download and unzip the sphinxbase and pocketsphinx packages:
 
 {% highlight bash %}
 wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
@@ -217,7 +211,7 @@ git clone https://github.com/shbhrsaha/jasper-client.git jasper
 Jasper requires various Python libraries that we can install with:
 
 {% highlight bash %}
-sudo pip install -r jasper-client/client/requirements.txt # should include six apscheduler python-mpd
+sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 
 Run crontab -e, then add the following lines:
@@ -253,7 +247,8 @@ scp * pi@192.168.2.3:./phonetisaurus/
 Set permissions everywhere:
 
 {% highlight bash %}
-chmod 777 -R *
+sudo chmod 777 /etc/network/interfaces
+sudo chmod 777 -R *
 {% endhighlight %}
 
 Configuring Jasper Client
@@ -266,6 +261,7 @@ In order for Jasper to accurately report local weather conditions, send you text
 To facilitate the process, run the profile population module that comes packaged with Jasper
 
 {% highlight bash %}
+cd ~/jasper/client
 python populate.py
 {% endhighlight %}
 
@@ -320,3 +316,7 @@ The client architecture is organized into a number of different components:
 Main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Conversation receives mic and profile from main then creates a notifier and brain. Brain receives the mic and profile originally descended from main and loads all the interactive components into memory. Brain is essentially the interface between developer-written modules and the core framework. Each module must implement isValid() and handle() functions and define a WORDS list.
 
 To learn more about how Jasper interactive modules work and how to write your own, check out the [API guide](/documentation/api)
+
+Next Steps
+---
+Now that you have fully configured your Jasper software, you're ready to start using it. Check out the [Usage](/documentation/usage) page for next steps.

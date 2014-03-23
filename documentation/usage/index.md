@@ -31,9 +31,15 @@ Modules to try
 ---
 By default, we've included the following modules to demonstrate Jasper's capabilities:
 
-- Time
-- Weather
-- News
-- Add more here...
+- Time: "What's the time?"
+- Weather: "How's the weather?... What's the weather like tomorrow?"
+- News: "What's in the news?"
+- Gmail: "Do I have any email?"
+- Hacker News: "What's on Hacker News?"
+- Facebook Notifications: "Facebook notifications?"
+- Birthday: "Who has a birthday today?"
+- Jokes: "Tell me a knock-knock joke."
+- Life: "What is the meaning of life?"
+
 
 To learn how to write your own module, check out the [Developer API documentation](/documentation/api)
