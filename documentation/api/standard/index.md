@@ -9,7 +9,7 @@ How to create a standard Jasper module
 
 Augmenting Jasper with a new module is a fairly simple process. With just a few lines of code, you can have Jasper telling you the weather, sending you the top headlines, etc.
 
-## Getting Started
+<h2 class="linked" id='getting-started'><a href="#getting-started" title="Permalink to this headline">Getting Started</a></h2>
 
 In this tutorial, we'll use the 'Meaning of Life' (Life.py) module as an example. Pretend this module doesn't exist and we want to implement it.
 
@@ -24,7 +24,7 @@ Here are the questions we need to answer in our implementation:
 
 We'll go through them in order.
 
-## What keywords do we need to recognize?
+<h2 class="linked" id='keywords'><a href="#keywords" title="Permalink to this headline">What keywords do we need to recognize?</a></h2>
 
 At this level, we're thinking about words we need to detect in the user's speech: that is, what words does the speech-to-text system need to be able to identify when the user speaks into the microphone?
 
@@ -38,7 +38,8 @@ WORDS = ["MEANING", "OF", "LIFE"]
 
 If your module doesn't require any keywords, leave `WORDS = []` in the code.
 
-## What does valid input look like?
+
+<h2 class="linked" id='valid-input'><a href="#valid-input" title="Permalink to this headline">What does valid input look like?</a></h2>
 
 At this level, we're thinking about the translated text that the module will interpret: that is, once the speech-to-text system has done its work, what valid text inputs will this module accept?
 
@@ -53,7 +54,8 @@ def isValid(text):
 
 Any word used in the `isValid` method should be included in the `WORDS` dictionary. How can you detect a word if the speech-to-text system never identifies it?
 
-## What do we do with valid input?
+
+<h2 class="linked" id='handling-input'><a href="#handling-input" title="Permalink to this headline">What do we do with valid input?</a></h2>
 
 This is the heart of the module: you know you've been passed valid input, so what do you do next? The interface requires a method `handle(input, mic, profile)`, where `input` is the parsed speech, `mic` is the mic object (used for speaking and taking in additional user input), and `profile` is the user profile.
 
@@ -69,7 +71,9 @@ def handle(text, mic, profile):
     mic.say(message)
 {% endhighlight %}
 
-## User Interaction
+The `handle` method will typically make active use of the user input (i.e., `text`), as in the following example.
+
+<h2 class="linked" id='user-interaction'><a href="#user-interaction" title="Permalink to this headline">User Interaction</a></h2>
 
 Some modules require user interaction. For example, in the News module (_News.py_), we ask the user if they want to be emailed links to the top headlines.
 
@@ -80,7 +84,7 @@ In such cases, these methods will come in handy:
 
 Note that `mic.activeListen(NATIVE=False)` will use the AT&T speech API. Any input involving _numbers_, _dates_, or any other dynamic data should use `NATIVE=False`.
 
-## Profile
+<h2 class="linked" id='profile'><a href="#profile" title="Permalink to this headline">Profile</a></h2>
 
 All modules have complete access to `profile`, the user's profile. This allows you to send texts or emails, read out timezone-sensitive dates, etc. The profile is simply a dictionary (see the [Profile Guide](#Profile_Guide) for more).
 

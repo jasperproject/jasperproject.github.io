@@ -11,19 +11,19 @@ You can choose from one of two ways to install Jasper's software on your Raspber
 
 -
 
-Method 1: Quick Start (Recommended)
-===
+
+<h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
+
 The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "Configuring Jasper Client". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
 
 -
 
-Method 2: Manual Installation
-===
+<h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 2: Manual Installation</a></h1>
 
 Follow these instructions only if you wish to compile your Jasper software from scratch. These steps are unnecessary if you follow the recommended "Quick Start" instructions above.
 
-Burn Raspbian image onto SD card
---------------------------------
+
+<h2 class="linked" id='burn-image'><a href="#burn-image" title="Permalink to this headline">Burn Raspbian image onto SD card</a></h2>
 
 We'll first clear the SD card using Gparted on Ubuntu, but you can use an equivalent utility or operating system. In Gparted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
 
@@ -43,13 +43,13 @@ sudo dd if=2013-12-20-wheezy-raspbian.img of=/dev/mmcblk0 bs=2M
 
 When it's done, remove your SD card, insert it into your Raspberry Pi and connect it to your computer via ethernet.
 
-Configure Raspbian
-------------------
+<h2 class="linked" id='configure-raspbian'><a href="#configure-raspbian" title="Permalink to this headline">Configure Raspbian</a></h2>
+
 
 We're now going to do some basic housekeeping and install some of the required libraries. You should SSH into your Pi with a command similar to the following. The IP address usually falls in the 192.168.2.3-192.168.2.10 range.
 
 {% highlight bash %}
-ssh pi@192.168.2.3 # password: raspberry
+ssh pi@192.168.2.3 # password (default): raspberry
 {% endhighlight %}
 
 Run the following, select to 'Expand Filesystem' and restart your Pi:
@@ -74,13 +74,13 @@ sudo vim /etc/modprobe.d/alsa-base.conf
 
 Change the following line:
 
-{% highlight text %}
+{% highlight bash %}
 options snd-usb-audio index=-2
 {% endhighlight %}
 
-to this:
+To this:
 
-{% highlight text %}
+{% highlight bash %}
 options snd-usb-audio index=0
 {% endhighlight %}
 
@@ -102,6 +102,7 @@ Make sure you have speakers or headphones connected to the audio jack of your Pi
 aplay -D hw:1,0 temp.wav
 {% endhighlight %}
 
+<<<<<<< HEAD
 Add the following line to the end of ~/.bash_profile:
 
 {% highlight bash %}
@@ -110,18 +111,25 @@ source .bashrc
 {% endhighlight %}
 
 And this to ~/.bashrc:
+=======
+And this to your ~/.bashrc or ~/.bash_profile:
+>>>>>>> c3fc7973134f361bff9a0774c834a2aed2c95157
 
 {% highlight bash %}
 LD_LIBRARY_PATH="/usr/local/lib"
 export LD_LIBRARY_PATH
-
 PATH=$PATH:/usr/local/lib/
 export PATH
 {% endhighlight %}
 
+With that, we're ready to install the core software that powers Jasper.
 
+<<<<<<< HEAD
 Install Pocketsphinx
 --------------------
+=======
+<h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx, CMUCLMTK, and Phonetisaurus</a></h2>
+>>>>>>> c3fc7973134f361bff9a0774c834a2aed2c95157
 
 Jasper uses Pocketsphinx for voice recognition. Let's download and unzip the sphinxbase and pocketsphinx packages:
 
@@ -143,7 +151,7 @@ sudo make install
 
 and pocketsphinx:
 
-{% highlight bash %}  
+{% highlight bash %}
 cd ~/pocketsphinx-0.8/
 ./configure
 make
@@ -152,18 +160,18 @@ sudo make install
 
 Restart your Pi.
 
-Configure Wireless
-------------------
+<h2 class="linked" id='configure-wireless'><a href="#configure-wireless" title="Permalink to this headline">Configure Wireless</a></h2>
+
 
 To configure wireless:
-    
+
 {% highlight bash %}
 sudo apt-get install dhcp3-server hostapd udhcpd
 {% endhighlight %}
 
 Insert the following lines to the end of /etc/dhcp/dhcpd.conf:
 
-{% highlight text %}
+{% highlight bash %}
 ddns-update-style interim;
 default-lease-time 600;
 max-lease-time 7200;
@@ -176,7 +184,7 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 
 And the following to the end of /etc/udhcpd.conf:
 
-{% highlight text %}
+{% highlight bash %}
 start 192.168.42.2 # This is the range of IPs that the hostspot will give to client devices.
 end 192.168.42.20
 interface wlan0 # The device uDHCP listens on.
@@ -189,7 +197,7 @@ opt lease 864000 # 10 day DHCP lease time in seconds
 
 Comment this line in sudo vim /etc/default/udhcpd:
 
-{% highlight text %}
+{% highlight bash %}
 #DHCPD_ENABLED="no"
 {% endhighlight %}
 
@@ -199,8 +207,10 @@ Then run:
 sudo ifconfig wlan0 192.168.42.1
 {% endhighlight %}
 
-Install Jasper
---------------
+Next, we will install Jasper itself.
+
+<h2 class="linked" id='install-jasper'><a href="#install-jasper" title="Permalink to this headline">Install Jasper</a></h2>
+
 
 In the home directory of your Pi, clone the Jasper source code:
 
@@ -208,13 +218,13 @@ In the home directory of your Pi, clone the Jasper source code:
 git clone https://github.com/shbhrsaha/jasper-client.git jasper
 {% endhighlight %}
 
-Jasper requires various Python libraries that we can install with:
+Jasper requires various Python libraries that we can install in one line with:
 
 {% highlight bash %}
 sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 
-Run crontab -e, then add the following lines:
+Run `crontab -e`, then add the following lines:
 
 {% highlight bash %}
 @reboot /home/pi/jasper/boot/boot.sh;
@@ -251,10 +261,13 @@ sudo chmod 777 /etc/network/interfaces
 sudo chmod 777 -R *
 {% endhighlight %}
 
-Configuring Jasper Client
--------------------------
+At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
 
-### Generating a user profile
+
+<h2 class="linked" id='configure-jasper'><a href="#configure-jasper" title="Permalink to this headline">Configuring the Jasper Client</a></h2>
+
+
+<h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
 
 In order for Jasper to accurately report local weather conditions, send you text messages, and more, you first need to generate a user profile.
 
@@ -269,7 +282,7 @@ The process is fairly self-explanatory: fill in the requested information, or hi
 
 **Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional. Providing this password will allow Jasper to report on incoming emails, etc., but be aware that the password will be stored as plaintext in _profile.yml_.
 
-### Facebook tokens
+<h3 class="linked" id='facebook-tokens'><a href="#facebook-tokens" title="Permalink to this headline">Facebook tokens</a></h3>
 
 To enable Facebook integration, Jasper requires an API key. Unfortunately, this is a multi-step process that requires manual editing of _profile.yml_. Fortunately, it's not particularly difficult.
 
@@ -286,7 +299,9 @@ To enable Facebook integration, Jasper requires an API key. Unfortunately, this 
             FB_TOKEN: abcdefghijklmnopqrstuvwxyz
 
 
-### AT&T tokens
+Note that similar keys could be added when developing other modules. For example, a Twitter key might be required to create a Twitter module and so forth.
+
+<h3 class="linked" id='att-tokens'><a href="#att-tokens" title="Permalink to this headline">AT&amp;T tokens</a></h3>
 
 Similarly, Jasper needs an API key for accessing AT&T's speech-to-text service. This allows Jasper to perform speech-to-text translation with improved accuracy.
 
@@ -303,8 +318,8 @@ Similarly, Jasper needs an API key for accessing AT&T's speech-to-text service. 
 
 With that, you're good-to-go from a configuration standpoint.
 
-Software Architecture
----------------------
+<h2 class="linked" id='software-architecture'><a href="#software-architecture" title="Permalink to this headline">Software Architecture</a></h2>
+
 Having installed the required libraries, it is worth taking a moment to understand how they interact and how the client code is architected.
 
 Jasper utilizes a number of open source libraries to function. Pocketsphinx performs speech recognition via Python bindings to the CMUSphinx engine. Jasper’s voice is owed to the popular TTS program, Espeak. Phonetisaurus and CMUCLMTK enable Jasper to generate dictionaries and language models on-the-fly based on the custom module vocabularies. HostAPD helps to broadcast an ad-hoc wireless network to assist wifi configuration. Mopidy enables streaming from Spotify, for those users who wish to use the module.

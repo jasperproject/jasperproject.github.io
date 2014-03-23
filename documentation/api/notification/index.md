@@ -10,11 +10,14 @@ How to create a Jasper notification module
 The classic example of a Notification module is one that silently monitors your email address and alerts you when you have a new email. Notification module run in the background, so you can use other modules while Jasper is monitoring your emails, for example.
 
 
-## The Basic Architecture
 
-As Notification modules run in the background, they require their own threads. All the code for notifications can be found in _Notifier.py_.
+<h2 class="linked" id='architecture'><a href="#architecture" title="Permalink to this headline">The Basic Architecture</a></h2>
 
-## NotificationClient
+As Notification modules run in the background, they require their own threads. The main idea is that these Notifier's have some operation in which they scrape or check for notifications, which are then stored in a thread-safe Queue and, soonafter, reported by Jasper.
+
+All the code for notifications can be found in _Notifier.py_.
+
+<h2 class="linked" id='NotificationClient'><a href="#NotificationClient" title="Permalink to this headline">NotificationClient</a></h2>
 
 Each Notification module module is wrapped in a `NotificationClient`. The notification client stores two instance variables: a method `gather` that queues up notifications, and some sort of timestamp argument `timestamp`. The requirement is that `gather` returns a new value for `timestamp`, as exhibited by the `run` method:
 
@@ -27,7 +30,7 @@ For example, with email, the timestamp argument is the time of the most recent e
 
 For a Twitter module, the timestamp argument might be the ID of the most recent Tweet reported. On each iteration, we'd return an updated ID to make sure that we don't report the same Tweet multiple times.
 
-## Notifier
+<h2 class="linked" id='Notifier'><a href="#Notifier" title="Permalink to this headline">Notifier</a></h2>
 
 The _Notifier_ stores a bunch of separate `NotificationClient` objects in a list, `self.notifiers`. Every few seconds, the Notifier executes each of the `NotificationClient` objects and reads off any notifications that are stored in the global queue.
 
@@ -64,7 +67,7 @@ self.notifiers = [
     self.NotificationClient(self.handleEmailNotifications, None)]
 {% endhighlight %}
 
-## Conclusion
+<h2 class="linked" id='conclusion'><a href="#conclusion" title="Permalink to this headline">Conclusion</a></h2>
 
 As a recap, there are two high-level steps to adding a new notification module:
 

@@ -7,6 +7,12 @@
  * URL: http://blacktie.co
  */
 
+/* Anchoring header elements */
+.linked {
+    padding-top: 60px;
+    margin-top: -60px;
+}
+
 body {
   background-color: #f2f2f2;
     font-family: 'Lato', sans-serif;
