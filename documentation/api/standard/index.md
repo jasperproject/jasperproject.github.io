@@ -105,3 +105,13 @@ def handle(text, mic, profile):
     oauth_access_token = profile['keys']["FB_TOKEN"]
     ...
 {% endhighlight %}
+
+<h2 class="linked" id='finishing-steps'><a href="#finishing-steps" title="Permalink to this headline">Finishing Steps</a></h2>
+
+When your module is complete, you can indicate to Jasper that you'd like to include it with the following steps.
+
+1) Add an import for your module in `client/modules/__init__.py`
+
+2) Add your module's name to `self.modules` in `client/brain.py`
+
+Jasper should now respond to the command you configured in `isValid(text)`.

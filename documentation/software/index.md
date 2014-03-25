@@ -102,7 +102,6 @@ Make sure you have speakers or headphones connected to the audio jack of your Pi
 aplay -D hw:1,0 temp.wav
 {% endhighlight %}
 
-<<<<<<< HEAD
 Add the following line to the end of ~/.bash_profile:
 
 {% highlight bash %}
@@ -110,10 +109,7 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 source .bashrc
 {% endhighlight %}
 
-And this to ~/.bashrc:
-=======
 And this to your ~/.bashrc or ~/.bash_profile:
->>>>>>> c3fc7973134f361bff9a0774c834a2aed2c95157
 
 {% highlight bash %}
 LD_LIBRARY_PATH="/usr/local/lib"
@@ -124,12 +120,7 @@ export PATH
 
 With that, we're ready to install the core software that powers Jasper.
 
-<<<<<<< HEAD
-Install Pocketsphinx
---------------------
-=======
-<h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx, CMUCLMTK, and Phonetisaurus</a></h2>
->>>>>>> c3fc7973134f361bff9a0774c834a2aed2c95157
+<h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx</a></h2>
 
 Jasper uses Pocketsphinx for voice recognition. Let's download and unzip the sphinxbase and pocketsphinx packages:
 
@@ -301,22 +292,74 @@ To enable Facebook integration, Jasper requires an API key. Unfortunately, this 
 
 Note that similar keys could be added when developing other modules. For example, a Twitter key might be required to create a Twitter module and so forth.
 
-<h3 class="linked" id='att-tokens'><a href="#att-tokens" title="Permalink to this headline">AT&amp;T tokens</a></h3>
+<h3 class="linked" id='spotify-integration'><a href="#spotify-integration" title="Permalink to this headline">Spotify integration</a></h3>
 
-Similarly, Jasper needs an API key for accessing AT&T's speech-to-text service. This allows Jasper to perform speech-to-text translation with improved accuracy.
+Jasper has the ability to play playlists from your Spotify library. This feature is optional and requires a Spotify Premium account. To configure Spotify on Jasper, just perform the following steps.
 
-1. Go to [https://developer.att.com/apis/speech](https://developer.att.com/apis/speech) and follow the registration instructions.
-2. After your account has been activated, hit 'Setup New App' in the dashboard window. Fill out the fields as required.
-3. Grab the App Key in the resulting window and add it to _profile.yml_, which will now look like:
+Install Mopidy with:
 
-        ...
-        prefers_email: false
-        timezone: US/Eastern
-        keys:
-            FB_TOKEN: abcdefghijklmnopqrstuvwxyz
-            ATT_KEY: abcdefghijklmnopqrstuvwxyz
+{% highlight bash %}
+wget -q -O - http://apt.mopidy.com/mopidy.gpg | sudo apt-key add -
+sudo wget -q -O /etc/apt/sources.list.d/mopidy.list http://apt.mopidy.com/mopidy.list
+sudo apt-get update
+sudo apt-get install mopidy mopidy-spotify --yes
+{% endhighlight %}
 
-With that, you're good-to-go from a configuration standpoint.
+We need to enable IPv6:
+
+{% highlight bash %}
+sudo modprobe ipv6
+echo ipv6 | sudo tee -a /etc/modules
+{% endhighlight %}
+
+Now run `sudo vim /root/.asoundrc`, and insert the following contents:
+
+{% highlight bash %}
+pcm.!default {
+        type hw
+        card 1
+}
+ctl.!default {
+        type hw
+        card 1
+}
+{% endhighlight %}
+
+We need to create the following new file and delete the default startup script:
+
+{% highlight bash %}
+sudo mkdir /root/.config
+sudo mkdir /root/.config/mopidy
+sudo rm /etc/init.d/mopidy
+{% endhighlight %}
+
+Now let's run `sudo vim /root/.config/mopidy/mopidy.conf` and insert the following
+
+{% highlight bash %}
+[spotify]
+username = YOUR_SPOTIFY_USERNAME
+password = YOUR_SPOTIFY_PASSWORD
+
+[mpd]
+hostname = ::
+
+[local]
+media_dir = ~/music
+
+[scrobbler]
+enabled = false
+
+[audio]
+output = alsasink
+{% endhighlight %}
+
+Finally, let's configure crontab to run mopidy by running `sudo crontab -e` and inserting the following entry:
+
+{% highlight bash %}
+@reboot mopidy;
+{% endhighlight %}
+
+Upon restarting your Jasper, you should be able to issue a "Spotify" command that will enter Spotify mode. For more information on how to use Spotify with your voice, check out the [Usage](/documentation/usage) guide.
 
 <h2 class="linked" id='software-architecture'><a href="#software-architecture" title="Permalink to this headline">Software Architecture</a></h2>
 
