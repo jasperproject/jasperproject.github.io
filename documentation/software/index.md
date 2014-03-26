@@ -272,7 +272,27 @@ python populate.py
 
 The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. The resulting profile will be stored as a [YML](http://fdik.org/yml/) file at _profile.yml_.
 
-**Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional. Providing this password will allow Jasper to report on incoming emails, etc., but be aware that the password will be stored as plaintext in _profile.yml_.
+**Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional and will never leave the device. This password allows Jasper to report on incoming emails _and_ send you text or email notifications, but be aware that the password will be stored as plaintext in _profile.yml_. The Gmail _address_ can be entered alone (without a password) and will be used to send you notifications if you configure a Mailgun account, as described below.
+
+<h3 class="linked" id='mailgun'><a href="#mailgun" title="Permalink to this headline">Mailgun as a Gmail alternative</a></h3>
+
+If you'd prefer not to enter your Gmail password, you can setup a free [Mailgun](https://mailgun.com/) account that Jasper will use to send you notifications. It's incredibly painless and Jasper is already setup for instant Mailgun integration. Note that if you don't enter your Gmail _address_, however, Jasper will only be able to send you notifications by text message (as he won't know your email address).
+
+In slightly more detail:
+
+1. Register for a free Mailgun account.
+2. Naivigate to the "Domains" tab and click on the sandbox server that should be provided initially.
+3. Click "Default Password" and choose a password.
+4. Take note of the "Default SMTP Login" email address.
+5. Edit your _profile.yml_ to read:
+
+       ...
+       mailgun:
+           username: postmaster@sandbox95948.mailgun.org
+           password: your_password
+6. Enjoy your notifications.
+
+
 
 <h3 class="linked" id='facebook-tokens'><a href="#facebook-tokens" title="Permalink to this headline">Facebook tokens</a></h3>
 
