@@ -32,9 +32,31 @@ After saying Jasper, you must wait for the high beep to speak your command. If y
 
 By default, we've included the following modules to demonstrate Jasper's capabilities:
 
-- Time
-- Weather
-- News
-- Add more here...
+- Time: "What's the time?"
+- Weather: "How's the weather?... What's the weather like tomorrow?"
+- News: "What's in the news?"
+- Gmail: "Do I have any email?"
+- Hacker News: "What's on Hacker News?"
+- Facebook Notifications: "Facebook notifications?"
+- Birthday: "Who has a birthday today?"
+- Jokes: "Tell me a knock-knock joke."
+- Life: "What is the meaning of life?"
 
-To learn how to write your own module, check out the [Developer API documentation](/documentation/api)
+
+To learn how to write your own module, check out the [Developer API documentation](/documentation/api).
+
+<h2 class="linked" id='spotify-mode'><a href="#spotify-mode" title="Permalink to this headline">Spotify Mode</a></h2>
+
+If you've [configured Spotify](/documentation/software/#spotify-integration), Jasper will enter Spotify mode with the "Music" or "Spotify" command. Here's a list of example commands you can issue while in Spotify mode:
+
+- "Play Hipster Playlist": plays playlist titled "Hipster" from your Spotify library
+- "Play": plays currently playing song
+- "Pause": pauses currently playing song
+- "Stop": stops currently playing song
+- "Louder": raises volume
+- "Softer": lowers volume
+- "Next": plays next song in playlist
+- "Previous": plays previous song in playlist
+- "Close": exits Spotify mode and resumes normal command interpretation
+
+Jasper may have difficulty detecting your cues when the music is loud. In these instances, it helps to distance the microphone from the speakers, lowering the volume, and/or speaking closer to the microphone.

@@ -14,7 +14,7 @@ You can choose from one of two ways to install Jasper's software on your Raspber
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "Configuring Jasper Client". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "[Configuring Jasper Client](#configure-jasper)". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
 
 -
 
@@ -63,14 +63,7 @@ Run the following commands to update Pi and some install some useful tools.
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
-sudo apt-get install vim --yes
-sudo apt-get install git-core --yes
-sudo apt-get install espeak --yes
-sudo apt-get install python-dev --yes
-sudo apt-get install python-pip --yes
-sudo apt-get install bison --yes
-sudo apt-get install libasound2-dev --yes
-sudo apt-get install libportaudio-dev python-pyaudio --yes
+sudo apt-get install vim git-core espeak python-dev python-pip bison libasound2-dev libportaudio-dev python-pyaudio --yes
 {% endhighlight %}
 
 Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
@@ -94,10 +87,10 @@ options snd-usb-audio index=0
 Back in the shell, run:
 
 {% highlight bash %}
-alsa force-reload
+sudo alsa force-reload
 {% endhighlight %}
 
-Test that recording works with:
+Test that recording works with. You may need to restart your Pi.
 
 {% highlight bash %}
 arecord temp.wav
@@ -107,6 +100,13 @@ Make sure you have speakers or headphones connected to the audio jack of your Pi
 
 {% highlight bash %}
 aplay -D hw:1,0 temp.wav
+{% endhighlight %}
+
+Add the following line to the end of ~/.bash_profile:
+
+{% highlight bash %}
+export LD_LIBRARY_PATH="/usr/local/lib"
+source .bashrc
 {% endhighlight %}
 
 And this to your ~/.bashrc or ~/.bash_profile:
@@ -120,9 +120,9 @@ export PATH
 
 With that, we're ready to install the core software that powers Jasper.
 
-<h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx, CMUCLMTK, and Phonetisaurus</a></h2>
+<h2 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Pocketsphinx</a></h2>
 
-Jasper uses Pocketsphinx for voice recognition. Let's download and unzip sphinxbase and pocketsphinx:
+Jasper uses Pocketsphinx for voice recognition. Let's download and unzip the sphinxbase and pocketsphinx packages:
 
 {% highlight bash %}
 wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
@@ -212,7 +212,7 @@ git clone https://github.com/shbhrsaha/jasper-client.git jasper
 Jasper requires various Python libraries that we can install in one line with:
 
 {% highlight bash %}
-sudo pip install -r jasper-client/client/requirements.txt
+sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 
 Run `crontab -e`, then add the following lines:
@@ -222,33 +222,35 @@ Run `crontab -e`, then add the following lines:
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
 
-Copy /usr/local/bin binaries:
+Download the [/usr/local/bin binaries]() to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
 
 {% highlight bash %}
-mkdir bin
 scp * pi@192.168.2.3:./bin/
+{% endhighlight %}
+
+Then on your Pi run the following:
+
+{% highlight bash %}
+cd ~/bin
 sudo cp * /usr/local/bin/
 {% endhighlight %}
 
-Copy /usr/local/lib:
+Now we repeat the process for the [/usr/local/lib binaries]() and [phonetisaurus binaries]().
 
 {% highlight bash %}
-mkdir lib
-scp * pi@192.168.2.3:./lib/
-sudo cp * /usr/local/lib/
+mkdir ~/lib # run on your Pi
+scp * pi@192.168.2.3:./lib/ # run from where you downloaded the binaries
+sudo cp * /usr/local/lib/ # run on your Pi
+
+mkdir phonetisaurus # run on the Pi
+scp * pi@192.168.2.3:./phonetisaurus/ # run from where you downloaded the binaries
 {% endhighlight %}
 
-Copy the phonetisaurus folder to the home directory:
+Set permissions everywhere on the Pi:
 
 {% highlight bash %}
-mkdir phonetisaurus
-scp * pi@192.168.2.3:./phonetisaurus/
-{% endhighlight %}
-
-Set permissions everywhere:
-
-{% highlight bash %}
-chmod 777 -R *
+sudo chmod 777 /etc/network/interfaces
+sudo chmod 777 -R *
 {% endhighlight %}
 
 At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
@@ -264,6 +266,7 @@ In order for Jasper to accurately report local weather conditions, send you text
 To facilitate the process, run the profile population module that comes packaged with Jasper
 
 {% highlight bash %}
+cd ~/jasper/client
 python populate.py
 {% endhighlight %}
 
@@ -290,22 +293,74 @@ To enable Facebook integration, Jasper requires an API key. Unfortunately, this 
 
 Note that similar keys could be added when developing other modules. For example, a Twitter key might be required to create a Twitter module and so forth.
 
-<h3 class="linked" id='att-tokens'><a href="#att-tokens" title="Permalink to this headline">AT&amp;T tokens</a></h3>
+<h3 class="linked" id='spotify-integration'><a href="#spotify-integration" title="Permalink to this headline">Spotify integration</a></h3>
 
-Similarly, Jasper needs an API key for accessing AT&T's speech-to-text service. This allows Jasper to perform speech-to-text translation with improved accuracy.
+Jasper has the ability to play playlists from your Spotify library. This feature is optional and requires a Spotify Premium account. To configure Spotify on Jasper, just perform the following steps.
 
-1. Go to [https://developer.att.com/apis/speech](https://developer.att.com/apis/speech) and follow the registration instructions.
-2. After your account has been activated, hit 'Setup New App' in the dashboard window. Fill out the fields as required.
-3. Grab the App Key in the resulting window and add it to _profile.yml_, which will now look like:
+Install Mopidy with:
 
-        ...
-        prefers_email: false
-        timezone: US/Eastern
-        keys:
-            FB_TOKEN: abcdefghijklmnopqrstuvwxyz
-            ATT_KEY: abcdefghijklmnopqrstuvwxyz
+{% highlight bash %}
+wget -q -O - http://apt.mopidy.com/mopidy.gpg | sudo apt-key add -
+sudo wget -q -O /etc/apt/sources.list.d/mopidy.list http://apt.mopidy.com/mopidy.list
+sudo apt-get update
+sudo apt-get install mopidy mopidy-spotify --yes
+{% endhighlight %}
 
-With that, you're good-to-go from a configuration standpoint.
+We need to enable IPv6:
+
+{% highlight bash %}
+sudo modprobe ipv6
+echo ipv6 | sudo tee -a /etc/modules
+{% endhighlight %}
+
+Now run `sudo vim /root/.asoundrc`, and insert the following contents:
+
+{% highlight bash %}
+pcm.!default {
+        type hw
+        card 1
+}
+ctl.!default {
+        type hw
+        card 1
+}
+{% endhighlight %}
+
+We need to create the following new file and delete the default startup script:
+
+{% highlight bash %}
+sudo mkdir /root/.config
+sudo mkdir /root/.config/mopidy
+sudo rm /etc/init.d/mopidy
+{% endhighlight %}
+
+Now let's run `sudo vim /root/.config/mopidy/mopidy.conf` and insert the following
+
+{% highlight bash %}
+[spotify]
+username = YOUR_SPOTIFY_USERNAME
+password = YOUR_SPOTIFY_PASSWORD
+
+[mpd]
+hostname = ::
+
+[local]
+media_dir = ~/music
+
+[scrobbler]
+enabled = false
+
+[audio]
+output = alsasink
+{% endhighlight %}
+
+Finally, let's configure crontab to run mopidy by running `sudo crontab -e` and inserting the following entry:
+
+{% highlight bash %}
+@reboot mopidy;
+{% endhighlight %}
+
+Upon restarting your Jasper, you should be able to issue a "Spotify" command that will enter Spotify mode. For more information on how to use Spotify with your voice, check out the [Usage](/documentation/usage) guide.
 
 <h2 class="linked" id='software-architecture'><a href="#software-architecture" title="Permalink to this headline">Software Architecture</a></h2>
 
@@ -320,3 +375,7 @@ The client architecture is organized into a number of different components:
 Main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Conversation receives mic and profile from main then creates a notifier and brain. Brain receives the mic and profile originally descended from main and loads all the interactive components into memory. Brain is essentially the interface between developer-written modules and the core framework. Each module must implement isValid() and handle() functions and define a WORDS list.
 
 To learn more about how Jasper interactive modules work and how to write your own, check out the [API guide](/documentation/api)
+
+Next Steps
+---
+Now that you have fully configured your Jasper software, you're ready to start using it. Check out the [Usage](/documentation/usage) page for next steps.
