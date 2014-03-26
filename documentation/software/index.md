@@ -14,7 +14,7 @@ You can choose from one of two ways to install Jasper's software on your Raspber
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "Configuring Jasper Client". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "[Configuring Jasper Client](#configure-jasper)". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
 
 -
 
@@ -222,30 +222,31 @@ Run `crontab -e`, then add the following lines:
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
 
-Copy /usr/local/bin binaries:
+Download the [/usr/local/bin binaries]() to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
 
 {% highlight bash %}
-mkdir bin
 scp * pi@192.168.2.3:./bin/
+{% endhighlight %}
+
+Then on your Pi run the following:
+
+{% highlight bash %}
+cd ~/bin
 sudo cp * /usr/local/bin/
 {% endhighlight %}
 
-Copy /usr/local/lib:
+Now we repeat the process for the [/usr/local/lib binaries]() and [phonetisaurus binaries]().
 
 {% highlight bash %}
-mkdir lib
-scp * pi@192.168.2.3:./lib/
-sudo cp * /usr/local/lib/
+mkdir ~/lib # run on your Pi
+scp * pi@192.168.2.3:./lib/ # run from where you downloaded the binaries
+sudo cp * /usr/local/lib/ # run on your Pi
+
+mkdir phonetisaurus # run on the Pi
+scp * pi@192.168.2.3:./phonetisaurus/ # run from where you downloaded the binaries
 {% endhighlight %}
 
-Copy the phonetisaurus folder to the home directory:
-
-{% highlight bash %}
-mkdir phonetisaurus
-scp * pi@192.168.2.3:./phonetisaurus/
-{% endhighlight %}
-
-Set permissions everywhere:
+Set permissions everywhere on the Pi:
 
 {% highlight bash %}
 sudo chmod 777 /etc/network/interfaces
