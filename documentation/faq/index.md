@@ -12,7 +12,7 @@ Here are some answers to questions you may have as you configure and use Jasper.
 <h2 class="linked" id='installation-configuration'><a href="#installation-configuration" title="Permalink to this headline">Installation &amp; Configuration</a></h2>
 
 - __Why can't I can't login to my Raspberry Pi for the first time?__
-    - Are you sure you imaged your SD card correctly? Your Raspberry Pi should emit a green LED light when booting. It may help to wipe your SD card clean with a tool like gparted before imaging with dd. See the [Software Guide](/documentation/software/) for full instructions.
+    - Are you sure you imaged your SD card correctly? Your Raspberry Pi should emit a green LED light when booting. It may help to wipe your SD card clean with a tool like [GParted](http://gparted.org) before imaging with dd. See the [Software Guide](/documentation/software/) for full instructions.
 - __Why isn't Jasper allowing me to set up a wireless network?__
     - Make sure you've followed all of the instructions in the 'Configure Wireless' section of the [Software Guide](/documentation/software/). If Jasper is still not providing the opportunity to configure the wireless connection, temporarily disconnect the wireless adapter, restart the Pi fully, then restart the Pi once more with the wireless adapter connected. Jasper should now ask you to configure the wireless network.
 - __What does Jasper do with the information I provide in my profile?__
