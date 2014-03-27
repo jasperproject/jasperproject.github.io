@@ -392,7 +392,9 @@ The client architecture is organized into a number of different components:
 
 ![Jasper Client Architecture](architecture.png)
 
-Main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Conversation receives mic and profile from main then creates a notifier and brain. Brain receives the mic and profile originally descended from main and loads all the interactive components into memory. Brain is essentially the interface between developer-written modules and the core framework. Each module must implement isValid() and handle() functions and define a WORDS list.
+main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Next, the conversation instance is fed the mic and profile as inputs, from which it creates a notifier and a brain.
+
+The brain then receives the mic and profile originally descended from main and loads all the interactive components into memory. The brain is essentially the interface between developer-written modules and the core framework. Each module must implement `isValid()` and `handle()` functions, as well as define a `WORDS = [...]` list.
 
 To learn more about how Jasper interactive modules work and how to write your own, check out the [API guide](/documentation/api)
 
