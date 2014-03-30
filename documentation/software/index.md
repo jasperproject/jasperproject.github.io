@@ -222,7 +222,7 @@ Run `crontab -e`, then add the following lines:
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
 
-Download the [/usr/local/bin binaries]() to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
+Download the [/usr/local/bin binaries](https://sourceforge.net/projects/jasperproject/files/usrlocalbin_binaries.tar.gz/download) to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
 
 {% highlight bash %}
 scp * pi@192.168.2.3:./bin/
@@ -235,7 +235,7 @@ cd ~/bin
 sudo cp * /usr/local/bin/
 {% endhighlight %}
 
-Now we repeat the process for the [/usr/local/lib binaries]() and [phonetisaurus binaries]().
+Now we repeat the process for the [/usr/local/lib binaries](https://sourceforge.net/projects/jasperproject/files/usrlocallib_binaries.tar.gz/download) and [phonetisaurus binaries](https://sourceforge.net/projects/jasperproject/files/phonetisaurus_binaries.tar.gz/download).
 
 {% highlight bash %}
 mkdir ~/lib # run on your Pi
