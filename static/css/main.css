@@ -181,6 +181,7 @@ i {
     -moz-border-radius: 4px 0 0 4px;
     border-radius: 4px 0 0 4px;
     font-weight:bold;
+    word-wrap: normal;
 }
 .nav-sidebar .active a {
     cursor: default;
