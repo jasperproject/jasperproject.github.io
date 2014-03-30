@@ -7,16 +7,14 @@ currentpage: software
 Software Guide
 ===
 
-You can choose from one of two ways to install Jasper's software on your Raspberry Pi.
-
--
+There are two ways to install Jasper's software on your Raspberry Pi.
 
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section below titled "[Configuring Jasper Client](#configure-jasper)". The other instructions are those who wish to understand how all of the supporting libraries are compiled on the Raspberry Pi. The instructions may be helpful for debugging.
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
 
--
+If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 2 may be to your liking (or, at the very least, helpful for debugging).
 
 <h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 2: Manual Installation</a></h1>
 
@@ -25,7 +23,7 @@ Follow these instructions only if you wish to compile your Jasper software from 
 
 <h2 class="linked" id='burn-image'><a href="#burn-image" title="Permalink to this headline">Burn Raspbian image onto SD card</a></h2>
 
-We'll first clear the SD card using Gparted on Ubuntu, but you can use an equivalent utility or operating system. In Gparted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
+We'll first clear the SD card using [GParted](http://gparted.org) on Ubuntu, but you can use an equivalent utility or operating system. In GParted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
 
 Download Raspbian Wheezy from [http://downloads.raspberrypi.org/raspbian_latest](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2014-01-07 release, newer releases may also work.
 
@@ -44,7 +42,6 @@ sudo dd if=2013-12-20-wheezy-raspbian.img of=/dev/mmcblk0 bs=2M
 When it's done, remove your SD card, insert it into your Raspberry Pi and connect it to your computer via ethernet.
 
 <h2 class="linked" id='configure-raspbian'><a href="#configure-raspbian" title="Permalink to this headline">Configure Raspbian</a></h2>
-
 
 We're now going to do some basic housekeeping and install some of the required libraries. You should SSH into your Pi with a command similar to the following. The IP address usually falls in the 192.168.2.3-192.168.2.10 range.
 
@@ -90,7 +87,7 @@ Back in the shell, run:
 sudo alsa force-reload
 {% endhighlight %}
 
-Test that recording works with. You may need to restart your Pi.
+Next, test that recording works (you may need to restart your Pi) by recording some audio with the following command:
 
 {% highlight bash %}
 arecord temp.wav
@@ -140,7 +137,7 @@ make
 sudo make install
 {% endhighlight %}
 
-and pocketsphinx:
+And pocketsphinx:
 
 {% highlight bash %}
 cd ~/pocketsphinx-0.8/
@@ -149,18 +146,17 @@ make
 sudo make install
 {% endhighlight %}
 
-Restart your Pi.
+Once the installations are complete, restart your Pi.
 
 <h2 class="linked" id='configure-wireless'><a href="#configure-wireless" title="Permalink to this headline">Configure Wireless</a></h2>
 
-
-To configure wireless:
+To configure wireless access, first install the following libraries:
 
 {% highlight bash %}
 sudo apt-get install dhcp3-server hostapd udhcpd
 {% endhighlight %}
 
-Insert the following lines to the end of /etc/dhcp/dhcpd.conf:
+Next, insert the following lines to the end of /etc/dhcp/dhcpd.conf:
 
 {% highlight bash %}
 ddns-update-style interim;
@@ -198,10 +194,9 @@ Then run:
 sudo ifconfig wlan0 192.168.42.1
 {% endhighlight %}
 
-Next, we will install Jasper itself.
+That's it! Next, we will install the Jasper software itself.
 
 <h2 class="linked" id='install-jasper'><a href="#install-jasper" title="Permalink to this headline">Install Jasper</a></h2>
-
 
 In the home directory of your Pi, clone the Jasper source code:
 
@@ -272,7 +267,27 @@ python populate.py
 
 The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. The resulting profile will be stored as a [YML](http://fdik.org/yml/) file at _profile.yml_.
 
-**Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional. Providing this password will allow Jasper to report on incoming emails, etc., but be aware that the password will be stored as plaintext in _profile.yml_.
+**Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional and will never leave the device. This password allows Jasper to report on incoming emails _and_ send you text or email notifications, but be aware that the password will be stored as plaintext in _profile.yml_. The Gmail _address_ can be entered alone (without a password) and will be used to send you notifications if you configure a Mailgun account, as described below.
+
+<h3 class="linked" id='mailgun'><a href="#mailgun" title="Permalink to this headline">Mailgun as a Gmail alternative</a></h3>
+
+If you'd prefer not to enter your Gmail password, you can setup a free [Mailgun](https://mailgun.com/) account that Jasper will use to send you notifications. It's incredibly painless and Jasper is already setup for instant Mailgun integration. Note that if you don't enter your Gmail _address_, however, Jasper will only be able to send you notifications by text message (as he won't know your email address).
+
+In slightly more detail:
+
+1. Register for a free Mailgun account.
+2. Navigate to the "Domains" tab and click on the sandbox server that should be provided initially.
+3. Click "Default Password" and choose a password.
+4. Take note of the "Default SMTP Login" email address.
+5. Edit your _profile.yml_ to read:
+
+       ...
+       mailgun:
+           username: postmaster@sandbox95948.mailgun.org
+           password: your_password
+6. Enjoy your notifications.
+
+
 
 <h3 class="linked" id='facebook-tokens'><a href="#facebook-tokens" title="Permalink to this headline">Facebook tokens</a></h3>
 
@@ -291,7 +306,7 @@ To enable Facebook integration, Jasper requires an API key. Unfortunately, this 
             FB_TOKEN: abcdefghijklmnopqrstuvwxyz
 
 
-Note that similar keys could be added when developing other modules. For example, a Twitter key might be required to create a Twitter module and so forth.
+Note that similar keys could be added when developing other modules. For example, a Twitter key might be required to create a Twitter module. The goal of the profile is to be straightforward and extensible.
 
 <h3 class="linked" id='spotify-integration'><a href="#spotify-integration" title="Permalink to this headline">Spotify integration</a></h3>
 
@@ -354,7 +369,7 @@ enabled = false
 output = alsasink
 {% endhighlight %}
 
-Finally, let's configure crontab to run mopidy by running `sudo crontab -e` and inserting the following entry:
+Finally, let's configure crontab to run Mopidy by running `sudo crontab -e` and inserting the following entry:
 
 {% highlight bash %}
 @reboot mopidy;
@@ -366,13 +381,15 @@ Upon restarting your Jasper, you should be able to issue a "Spotify" command tha
 
 Having installed the required libraries, it is worth taking a moment to understand how they interact and how the client code is architected.
 
-Jasper utilizes a number of open source libraries to function. Pocketsphinx performs speech recognition via Python bindings to the CMUSphinx engine. Jasper’s voice is owed to the popular TTS program, Espeak. Phonetisaurus and CMUCLMTK enable Jasper to generate dictionaries and language models on-the-fly based on the custom module vocabularies. HostAPD helps to broadcast an ad-hoc wireless network to assist wifi configuration. Mopidy enables streaming from Spotify, for those users who wish to use the module.
+Jasper utilizes a number of open source libraries to function. [Pocketsphinx](http://cmusphinx.sourceforge.net/2010/03/pocketsphinx-0-6-release/) performs speech recognition via Python bindings to the [CMUSphinx](http://cmusphinx.sourceforge.net) engine. Jasper’s voice is owed to the popular TTS program, [eSpeak](http://espeak.sourceforge.net). [Phonetisaurus](https://code.google.com/p/phonetisaurus/) and CMUCLMTK enable Jasper to generate dictionaries and language models on-the-fly based on the custom module vocabularies. HostAPD helps to broadcast an ad-hoc wireless network to assist wifi configuration. Mopidy enables streaming from Spotify, for those users who wish to use the module.
 
 The client architecture is organized into a number of different components:
 
 ![Jasper Client Architecture](architecture.png)
 
-Main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Conversation receives mic and profile from main then creates a notifier and brain. Brain receives the mic and profile originally descended from main and loads all the interactive components into memory. Brain is essentially the interface between developer-written modules and the core framework. Each module must implement isValid() and handle() functions and define a WORDS list.
+main.py is the program that orchestrates all of Jasper. It creates mic, profile, and conversation instances. Next, the conversation instance is fed the mic and profile as inputs, from which it creates a notifier and a brain.
+
+The brain then receives the mic and profile originally descended from main and loads all the interactive components into memory. The brain is essentially the interface between developer-written modules and the core framework. Each module must implement `isValid()` and `handle()` functions, as well as define a `WORDS = [...]` list.
 
 To learn more about how Jasper interactive modules work and how to write your own, check out the [API guide](/documentation/api)
 
