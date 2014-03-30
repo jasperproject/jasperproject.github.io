@@ -18,7 +18,7 @@ Jasper is designed specifically for the Raspberry Pi (Model B) and requires some
 - [Micro-USB Cable](http://www.amazon.com/Monoprice-Male-Micro-28AWG-Cable/dp/B001U3SU8U/ref=pd_sim_pc_1)
 - [Ethernet Cable](https://www.google.com/search?hl=en&amp;tbm=shop&amp;q=ethernet+cable)
 - [USB Wall Charging Adapter](http://www.amazon.com/Zeimax-Travel-Charger-White-iPhone/dp/B00CO6TNM4/ref=sr_1_1?s=electronics)
-- Speakers that work through the Raspberry Pi audio jack (probably need to be self-powered)
+- [Speakers that work through the Raspberry Pi audio jack (probably need to be self-powered)](https://www.google.com/shopping/product/1749789584867681205)
 
 <h2 class="linked" id='assembly'><a href="#assembly" title="Permalink to this headline">Assembly</a></h2>
 

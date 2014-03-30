@@ -34,12 +34,13 @@ Here are some answers to questions you may have as you configure and use Jasper.
 <h2 class="linked" id='developing'><a href="#developing" title="Permalink to this headline">Developing on Jasper</a></h2>
 
 - __What if my module's keywords conflict with those of another module?__
-    - In brain.py, the modules are _ordered_ in the Brain's `modules` attribute:
+    - In brain.py, the modules are _ordered_ in the Brain's `modules` attribute shown below. Jasper sends an input query to the first module in the list that matches the query. For example, if both the Gmail and Notifications modules accepted the input "email", Jasper would choose to send it to the Gmail module, as it comes first in the list. When developing modules with conflicting keywords, consider this module's priority vis-a-vis the others in this list.
     
-          self.modules = [
-              Gmail, Notifications, Birthday, Weather, HN, News, Time, Joke, Life]
+    {% highlight python %}
+    self.modules = [
+        Gmail, Notifications, Birthday, Weather, HN, News, Time, Joke, Life]
+    {% endhighlight %}
 
-      Jasper sends an input query to the first module in the list that matches the query. For example, if both the Gmail and Notifications modules accepted the input "email", Jasper would choose to send it to the Gmail module, as it comes first in the list. When developing modules with conflicting keywords, consider this module's priority vis-a-vis the others in this list.
 - __Is there any way to interact with Jasper on the command-line?__
     - Yes! Try running: "python main.py --local" when SSHed into the Pi to access Jasper's command-line interface (CLI). Note that there's no need to type "Jasper" between commands when using the CLI, as you would when interacting through speech.
 - __What if my module needs more accurate information from the input text? For example, what if I need to capture a number ("one", "two", "three", etc.)? I can't list every number in the input, so what do I do?__
