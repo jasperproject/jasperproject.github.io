@@ -12,7 +12,7 @@ There are two ways to install Jasper's software on your Raspberry Pi.
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
 
 If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 2 may be to your liking (or, at the very least, helpful for debugging).
 
@@ -194,28 +194,16 @@ Then run:
 sudo ifconfig wlan0 192.168.42.1
 {% endhighlight %}
 
-That's it! Next, we will install the Jasper software itself.
-
-<h2 class="linked" id='install-jasper'><a href="#install-jasper" title="Permalink to this headline">Install Jasper</a></h2>
-
-In the home directory of your Pi, clone the Jasper source code:
-
-{% highlight bash %}
-git clone https://github.com/shbhrsaha/jasper-client.git jasper
-{% endhighlight %}
-
-Jasper requires various Python libraries that we can install in one line with:
-
-{% highlight bash %}
-sudo pip install -r jasper/client/requirements.txt
-{% endhighlight %}
-
 Run `crontab -e`, then add the following lines:
 
 {% highlight bash %}
 @reboot /home/pi/jasper/boot/boot.sh;
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
+
+That's it! Next, we will install some binaries that Jasper requires.
+
+<h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install Binaries</a></h2>
 
 Download the [/usr/local/bin binaries](https://sourceforge.net/projects/jasperproject/files/usrlocalbin_binaries.tar.gz/download) to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
 
@@ -252,6 +240,20 @@ At this point, we've installed Jasper and all the necessary software to run it. 
 
 
 <h2 class="linked" id='configure-jasper'><a href="#configure-jasper" title="Permalink to this headline">Configuring the Jasper Client</a></h2>
+
+<h3 class="linked" id='install-client'><a href="#install-client" title="Permalink to this headline">Install Jasper Client</a></h3>
+
+In the home directory of your Pi, clone the Jasper source code:
+
+{% highlight bash %}
+git clone https://github.com/jasperproject/jasper-client.git jasper
+{% endhighlight %}
+
+Jasper requires various Python libraries that we can install in one line with:
+
+{% highlight bash %}
+sudo pip install -r jasper/client/requirements.txt
+{% endhighlight %}
 
 
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>

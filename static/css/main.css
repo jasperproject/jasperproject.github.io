@@ -69,6 +69,12 @@ a {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
+p a {
+    font-weight: 500;
+    color: #2a6496;
+    text-decoration: underline;
+}
+
 a:hover,
 a:focus {
     color: #7b7b7b;
