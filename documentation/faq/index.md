@@ -19,6 +19,14 @@ Here are some answers to questions you may have as you configure and use Jasper.
     - The information in the profile allows Jasper modules to tailor their responses and actions to you. For example, the weather module will be able to tell you about the weather in your area, and the time module will be able to report a time that's sensitive to your timezone. None of this information ever leaves the Pi (unless, of course, you create a module that sends the profile information elsewhere).
 - __Why does Jasper ask for my Gmail password?__
     - As with any information requested in the profile populator, this is purely optional and will never leave the Pi. If provided, Jasper will be able to tell you when you have new emails. Additionally, Jasper will use this information to send relevant messages to your email and/or phone (e.g., links to articles that you've requested). As an alternative, consider using [Mailgun](/documentation/software/#mailgun).
+- __Why do I get a segmentation fault when running `main.py`?__
+    - This question concerns the following error:
+        
+    -  `SYSTEM_ERROR: "dict.c", line 274: Failed to open dictionary file [...] No such file or directory`
+
+        `zsh: segmentation fault  python main.py`
+
+    - It is caused by the speech dictionary not being created during the boot process. Make sure you've [added the boot script](/documentation/software/#install-client) to crontab, then restart your Pi. If a `dictionary.dic` file is still not present in your `client/` directory, just run `~/jasper/boot/boot.py` manually to force the dictionary generation.
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 

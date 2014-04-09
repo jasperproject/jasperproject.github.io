@@ -194,10 +194,9 @@ Then run:
 sudo ifconfig wlan0 192.168.42.1
 {% endhighlight %}
 
-Run `crontab -e`, then add the following lines:
+Run `crontab -e`, then add the following line:
 
 {% highlight bash %}
-@reboot /home/pi/jasper/boot/boot.sh;
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
 
@@ -253,6 +252,12 @@ Jasper requires various Python libraries that we can install in one line with:
 
 {% highlight bash %}
 sudo pip install -r jasper/client/requirements.txt
+{% endhighlight %}
+
+Run `crontab -e`, then add the following line, if it's not there already:
+
+{% highlight bash %}
+@reboot /home/pi/jasper/boot/boot.sh;
 {% endhighlight %}
 
 
