@@ -208,7 +208,7 @@ sudo chmod 777 /etc/network/interfaces
 
 That's it! Next, we will install some binaries that Jasper requires.
 
-<h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install CMUCLMTK OpenFST, MIT Language Modeling Toolkit, m2m-aligner, Phonetisaurus</a></h2>
+<h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install CMUCLMTK, OpenFST, MIT Language Modeling Toolkit, m2m-aligner, Phonetisaurus</a></h2>
 
 Note that some of these installation steps take more time to complete than previous steps.
 
