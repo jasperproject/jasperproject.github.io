@@ -318,6 +318,7 @@ git clone https://github.com/jasperproject/jasper-client.git jasper
 Jasper requires various Python libraries that we can install in one line with:
 
 {% highlight bash %}
+sudo pip install --upgrade setuptools
 sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 

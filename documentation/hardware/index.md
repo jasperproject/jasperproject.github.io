@@ -14,14 +14,18 @@ Jasper is designed specifically for the Raspberry Pi (Model B) and requires some
 - [Raspberry Pi Model B](https://www.google.com/shopping/product/16525736034140563056)
 - [Akiro Kinobo USB Microphone](http://www.amazon.com/USB-2-0-Microphone-Recognition-Software/%20dp/B008CNZOJY/ref=sr_1_1?s=electronics)
 - [4GB SD Card](https://www.google.com/shopping/product/4813288882623522717)
-- [Airlink Mini-USB Adapter](http://www.amazon.com/Airlink-compatible-Wireless-Mini-%20USB-AWLL5099/dp/B006ZZUK5Y/ref=sr_1_5?%20s=electronics)
-- [Micro-USB Cable](http://www.amazon.com/Monoprice-Male-Micro-28AWG-Cable/dp/B001U3SU8U/ref=pd_sim_pc_1)
 - [Ethernet Cable](https://www.google.com/search?hl=en&amp;tbm=shop&amp;q=ethernet+cable)
+- [Airlink Mini-USB Adapter](http://www.amazon.com/Airlink-compatible-Wireless-Mini-%20USB-AWLL5099/dp/B006ZZUK5Y/ref=sr_1_5?%20s=electronics) (optional—see below)
+- [Micro-USB Cable](http://www.amazon.com/Monoprice-Male-Micro-28AWG-Cable/dp/B001U3SU8U/ref=pd_sim_pc_1)
 - [USB Wall Charging Adapter](http://www.amazon.com/Zeimax-Travel-Charger-White-iPhone/dp/B00CO6TNM4/ref=sr_1_1?s=electronics)
 - [Speakers that work through the Raspberry Pi audio jack (probably need to be self-powered)](https://www.google.com/shopping/product/1749789584867681205)
 
 <h2 class="linked" id='assembly'><a href="#assembly" title="Permalink to this headline">Assembly</a></h2>
 
-Assembly of the required components is straightforward. Insert the microphone, SD card, wireless adapter, micro-USB cable, ethernet cable, and speakers into the Raspberry Pi. The USB wall charging adapter is recommended to power Jasper as a standalone device.
+Assembly of the required components is straightforward. Insert the microphone, SD card, wireless adapter (if you have one), micro-USB cable, ethernet cable, and speakers into the Raspberry Pi. The USB wall charging adapter is recommended to power Jasper as a standalone device.
 
-The ethernet cable will be used to log in to the pi from a computer during the software installation step.
+The ethernet cable will be used to log in to the pi from a computer during the software installation step. After installation, if you prefer to use a wireless connection, this cable can be removed.
+
+<h3 class="linked" id='internet'><a href="#internet" title="Permalink to this headline">Internet Connection</a></h3>
+
+As mentioned above, the wireless adapter is optional. Jasper runs just fine on a wired connection (via ethernet), so you can choose between the two setups depending on what works best for you.
