@@ -200,38 +200,105 @@ Run `crontab -e`, then add the following line:
 */1 * * * * ping -c 1 google.com
 {% endhighlight %}
 
-That's it! Next, we will install some binaries that Jasper requires.
-
-<h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install Binaries</a></h2>
-
-Download the [/usr/local/bin binaries](https://sourceforge.net/projects/jasperproject/files/usrlocalbin_binaries.tar.gz/download) to your computer and run `mkdir ~/bin` on your Pi. On your computer, navigate to where you downloaded the binaries and run the following, replacing the IP address of your Pi, if appropriate:
-
-{% highlight bash %}
-scp * pi@192.168.2.3:./bin/
-{% endhighlight %}
-
-Then on your Pi run the following:
-
-{% highlight bash %}
-cd ~/bin
-sudo cp * /usr/local/bin/
-{% endhighlight %}
-
-Now we repeat the process for the [/usr/local/lib binaries](https://sourceforge.net/projects/jasperproject/files/usrlocallib_binaries.tar.gz/download) and [phonetisaurus binaries](https://sourceforge.net/projects/jasperproject/files/phonetisaurus_binaries.tar.gz/download).
-
-{% highlight bash %}
-mkdir ~/lib # run on your Pi
-scp * pi@192.168.2.3:./lib/ # run from where you downloaded the binaries
-sudo cp * /usr/local/lib/ # run on your Pi
-
-mkdir phonetisaurus # run on the Pi
-scp * pi@192.168.2.3:./phonetisaurus/ # run from where you downloaded the binaries
-{% endhighlight %}
-
-Set permissions everywhere on the Pi:
+Set permissions:
 
 {% highlight bash %}
 sudo chmod 777 /etc/network/interfaces
+{% endhighlight %}
+
+That's it! Next, we will install some binaries that Jasper requires.
+
+<h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install CMUCLMTK OpenFST, MIT Language Modeling Toolkit, m2m-aligner, Phonetisaurus</a></h2>
+
+Note that some of these installation steps take more time to complete than previous steps.
+
+Begin by installing some dependencies:
+
+{% highlight bash %}
+sudo apt-get install subversion autoconf libtool automake gfortran --yes
+{% endhighlight %}
+
+Start by checking out and installing CMUCLMTK:
+
+{% highlight bash %}
+svn co https://svn.code.sf.net/p/cmusphinx/code/trunk/cmuclmtk/
+sudo ./autogen.sh && sudo make && sudo make install
+{% endhighlight %}
+
+Then, download the libraries:
+
+{% highlight bash %}
+wget http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.3.3.tar.gz
+wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
+wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
+wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
+wget http://phonetisaurus.googlecode.com/files/g014b2b.tgz
+{% endhighlight %}
+
+Untar the downloads:
+
+{% highlight bash %}
+tar -xvf m2m-aligner-1.2.tar.gz
+tar -xvf openfst-1.3.3.tar.gz
+tar -xvf phonetisaurus-0.7.8.tgz
+tar -xvf mitlm-0.4.1.tar.gz
+tar -xvf g014b2b.tgz
+{% endhighlight %}
+
+Build OpenFST:
+
+{% highlight bash %}
+cd openfst-1.3.3/
+sudo ./configure --enable-compact-fsts --enable-const-fsts --enable-far --enable-lookahead-fsts --enable-pdt
+sudo make install # come back after a really long time
+{% endhighlight %}
+
+Build M2M:
+
+{% highlight bash %}
+cd m2m-aligner-1.2/
+sudo make
+{% endhighlight %}
+
+Build MITLMT:
+
+{% highlight bash %}
+cd mitlm-0.4.1/
+sudo ./configure
+sudo make install
+{% endhighlight %}
+
+Build Phonetisaurus:
+
+{% highlight bash %}
+cd phonetisaurus-0.7.8/
+cd src
+sudo make
+{% endhighlight %}
+
+Move some of the compiled files:
+
+{% highlight bash %}
+sudo cp ~/m2m-aligner-1.2/m2m-aligner /usr/local/bin/m2m-aligner
+sudo cp ~/phonetisaurus-0.7.8/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
+{% endhighlight %}
+
+Build Phonetisaurus model:
+
+{% highlight bash %}
+cd g014b2b/
+./compile-fst.sh
+{% endhighlight %}
+
+Finally, rename a folder:
+
+{% highlight bash %}
+mv ~/g014b2b ~/phonetisaurus
+{% endhighlight %}
+
+Set permissions inside the home directory:
+
+{% highlight bash %}
 sudo chmod 777 -R *
 {% endhighlight %}
 
