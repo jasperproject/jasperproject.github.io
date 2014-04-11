@@ -12,13 +12,15 @@ Jasper is designed specifically for the Raspberry Pi (Model B) and requires some
 <h2 class="linked" id='complete-list'><a href="#complete-list" title="Permalink to this headline">The Complete List</a></h2>
 
 - [Raspberry Pi Model B](https://www.google.com/shopping/product/16525736034140563056)
-- [Akiro Kinobo USB Microphone](http://www.amazon.com/USB-2-0-Microphone-Recognition-Software/%20dp/B008CNZOJY/ref=sr_1_1?s=electronics)
+- USB Microphone (we tested with [Akiro Kinobo USB Microphone](http://www.amazon.com/USB-2-0-Microphone-Recognition-Software/%20dp/B008CNZOJY/ref=sr_1_1?s=electronics))
 - [4GB SD Card](https://www.google.com/shopping/product/4813288882623522717)
 - [Ethernet Cable](https://www.google.com/search?hl=en&amp;tbm=shop&amp;q=ethernet+cable)
-- [Airlink Mini-USB Adapter](http://www.amazon.com/Airlink-compatible-Wireless-Mini-%20USB-AWLL5099/dp/B006ZZUK5Y/ref=sr_1_5?%20s=electronics) (optional—see below)
+- [Airlink Mini-USB Adapter](https://www.google.com/search?hl=en&tbm=shop&q=Airlink+Mini-USB+Adapter) (optional—see below)
 - [Micro-USB Cable](http://www.amazon.com/Monoprice-Male-Micro-28AWG-Cable/dp/B001U3SU8U/ref=pd_sim_pc_1)
-- [USB Wall Charging Adapter](http://www.amazon.com/Zeimax-Travel-Charger-White-iPhone/dp/B00CO6TNM4/ref=sr_1_1?s=electronics)
+- [USB Wall Charging Adapter](https://www.google.com/search?hl=en&tbm=shop&q=USB+wall+charger)
 - [Speakers that work through the Raspberry Pi audio jack (probably need to be self-powered)](https://www.google.com/shopping/product/1749789584867681205)
+
+The [Raspberry Pi Verified Peripherals List](http://elinux.org/RPi_VerifiedPeripherals) may be helpful for finding substitutes for the products recommended above.
 
 <h2 class="linked" id='assembly'><a href="#assembly" title="Permalink to this headline">Assembly</a></h2>
 

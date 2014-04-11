@@ -296,12 +296,6 @@ Finally, rename a folder:
 mv ~/g014b2b ~/phonetisaurus
 {% endhighlight %}
 
-Set permissions inside the home directory:
-
-{% highlight bash %}
-sudo chmod 777 -R *
-{% endhighlight %}
-
 At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
 
 
@@ -328,6 +322,11 @@ Run `crontab -e`, then add the following line, if it's not there already:
 @reboot /home/pi/jasper/boot/boot.sh;
 {% endhighlight %}
 
+Set permissions inside the home directory:
+
+{% highlight bash %}
+sudo chmod 777 -R *
+{% endhighlight %}
 
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
 
