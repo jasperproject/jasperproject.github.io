@@ -240,7 +240,7 @@ Untar the downloads:
 
 {% highlight bash %}
 tar -xvf m2m-aligner-1.2.tar.gz
-tar -xvf openfst-1.3.3.tar.gz
+tar -xvf openfst-1.3.4.tar.gz
 tar -xvf phonetisaurus-0.7.8.tgz
 tar -xvf mitlm-0.4.1.tar.gz
 tar -xvf g014b2b.tgz
@@ -249,7 +249,7 @@ tar -xvf g014b2b.tgz
 Build OpenFST:
 
 {% highlight bash %}
-cd openfst-1.3.3/
+cd openfst-1.3.4/
 sudo ./configure --enable-compact-fsts --enable-const-fsts --enable-far --enable-lookahead-fsts --enable-pdt
 sudo make install # come back after a really long time
 {% endhighlight %}
