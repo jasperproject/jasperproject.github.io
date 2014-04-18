@@ -82,7 +82,7 @@ In such cases, these methods will come in handy:
 1. `mic.say(message)`: reads out `message` to the user.
 2. `mic.activeListen()`: beeps (to alert the user that input is required) and listens until the user has finished speaking, returning the parsed speech.
 
-Note that `mic.activeListen(NATIVE=False)` will use the AT&T speech API. Any input involving _numbers_, _dates_, or any other dynamic data should use `NATIVE=False`.
+`mic.activeListen()` has a few optional arguments, but the default settings are sufficient for most use-cases.
 
 <h2 class="linked" id='profile'><a href="#profile" title="Permalink to this headline">Profile</a></h2>
 
