@@ -240,7 +240,7 @@ Untar the downloads:
 
 {% highlight bash %}
 tar -xvf m2m-aligner-1.2.tar.gz
-tar -xvf openfst-1.3.3.tar.gz
+tar -xvf openfst-1.3.4.tar.gz
 tar -xvf phonetisaurus-0.7.8.tgz
 tar -xvf mitlm-0.4.1.tar.gz
 tar -xvf g014b2b.tgz
