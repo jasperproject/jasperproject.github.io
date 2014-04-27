@@ -329,6 +329,8 @@ Set permissions inside the home directory:
 sudo chmod 777 -R *
 {% endhighlight %}
 
+Restart your Raspberry Pi. Doing so will run `boot.py`, which generates the `languagemodel.lm` file in the `client/` folder.
+
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
 
 In order for Jasper to accurately report local weather conditions, send you text messages, and more, you first need to generate a user profile.
