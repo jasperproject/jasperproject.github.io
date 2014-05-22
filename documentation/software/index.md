@@ -215,7 +215,7 @@ Note that some of these installation steps take more time to complete than previ
 Begin by installing some dependencies:
 
 {% highlight bash %}
-sudo apt-get install subversion autoconf libtool automake gfortran --yes
+sudo apt-get install subversion autoconf libtool automake gfortran g++ --yes
 {% endhighlight %}
 
 Start by checking out and installing CMUCLMTK:
