@@ -222,13 +222,14 @@ Start by checking out and installing CMUCLMTK:
 
 {% highlight bash %}
 svn co https://svn.code.sf.net/p/cmusphinx/code/trunk/cmuclmtk/
+cd cmuclmtk/
 sudo ./autogen.sh && sudo make && sudo make install
 {% endhighlight %}
 
 Then, download the libraries:
 
 {% highlight bash %}
-wget http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.3.3.tar.gz
+wget http://www.cs.nyu.edu/~allauzen/openfst/openfst-1.3.4.tar.gz
 wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
 wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
 wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
@@ -327,6 +328,8 @@ Set permissions inside the home directory:
 {% highlight bash %}
 sudo chmod 777 -R *
 {% endhighlight %}
+
+Restart your Raspberry Pi. Doing so will run `boot.py`, which generates the `languagemodel.lm` file in the `client/` folder.
 
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
 
