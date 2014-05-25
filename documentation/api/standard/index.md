@@ -36,7 +36,7 @@ In terms of code, the interface requests a list of single-word strings called `W
 WORDS = ["MEANING", "OF", "LIFE"]
 {% endhighlight %}
 
-If your module doesn't require any keywords, leave `WORDS = []` in the code.
+If your module doesn't require any keywords, assign `WORDS = []`, as the presence of the `WORDS` attribute is often used to determine whether a module is a Jasper module.
 
 
 <h2 class="linked" id='valid-input'><a href="#valid-input" title="Permalink to this headline">What does valid input look like?</a></h2>
@@ -73,6 +73,18 @@ def handle(text, mic, profile):
 
 The `handle` method will typically make active use of the user input (i.e., `text`), as in the following example.
 
+<h2 class="linked" id='priorities'><a href="#priorities" title="Permalink to this headline">What if user input is accepted by multiple modules?</a></h2>
+
+This is a valid concern. Say you have both the 'News' and 'Hacker News' modules installed on your Jasper device, and the user input is "What's on Hacker News?". The 'News' module accepts nay input with the (case-insensitive) string "news" in it; the 'Hacker News' module accepts any input with the (case-insensitive) string "hacker news" in it. So both would accept this input; but running more than one module is somewhat nonsensical. Which gets priority?
+
+The more reasonable choice would be to pass it to the 'Hacker News' module. Why? It has more specific requirements on accepting user input and will trigger fewer false positives. The key idea, then, is to give a higher 'priority' to modules that accept more specific user input.
+
+Modules can thus define an optional attribute `PRIORITY`, which should be an integer. Priorities work like CSS [z-indices](http://www.w3schools.com/cssref/pr_pos_z-index.asp): their absolute value is meaningless, as modules are merely sorted by their priorities.
+
+In the above example, the 'Hacker News' module defines `PRIORITY = 4`, while the 'News' module defines `PRIORITY = 3`. So if we're passed in "What's on Hacker News?", the 'Hacker News' module will be checked first and will subsequently be passed in the input.
+
+If a module does not define a `PRIORITY`, it will be defaulted to 0. Note that the 'Unclear' module has `PRIORITY` equal to Python's smallest possible integer.
+
 <h2 class="linked" id='user-interaction'><a href="#user-interaction" title="Permalink to this headline">User Interaction</a></h2>
 
 Some modules require user interaction. For example, in the News module (_News.py_), we ask the user if they want to be emailed links to the top headlines.
@@ -106,12 +118,8 @@ def handle(text, mic, profile):
     ...
 {% endhighlight %}
 
+Of course, as the profile is just a dictionary, it can be extended in whatever way you'd like.
+
 <h2 class="linked" id='finishing-steps'><a href="#finishing-steps" title="Permalink to this headline">Finishing Steps</a></h2>
 
-When your module is complete, you can indicate to Jasper that you'd like to include it with the following steps.
-
-1) Add an import for your module in `client/modules/__init__.py`
-
-2) Add your module's name to `self.modules` in `client/brain.py`
-
-Jasper should now respond to the command you configured in `isValid(text)`.
+When your module is complete, you can indicate to Jasper that you'd like to include it by adding an import for your module in `client/modules/__init__.py`. Jasper should then respond to the user inputs you defined as valid in `isValid(text)`.
