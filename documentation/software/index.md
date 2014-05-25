@@ -99,7 +99,7 @@ Make sure you have speakers or headphones connected to the audio jack of your Pi
 aplay -D hw:1,0 temp.wav
 {% endhighlight %}
 
-Add the following line to the end of ~/.bash_profile:
+Add the following line to the end of ~/.bash_profile (you may need to run `touch ~/.bash_profile` if the file doesn't exist already):
 
 {% highlight bash %}
 export LD_LIBRARY_PATH="/usr/local/lib"
@@ -218,15 +218,16 @@ Begin by installing some dependencies:
 sudo apt-get install subversion autoconf libtool automake gfortran --yes
 {% endhighlight %}
 
-Start by checking out and installing CMUCLMTK:
+Next, move into your home (or Jasper) directory to check out and install CMUCLMTK:
 
 {% highlight bash %}
 svn co https://svn.code.sf.net/p/cmusphinx/code/trunk/cmuclmtk/
 cd cmuclmtk/
 sudo ./autogen.sh && sudo make && sudo make install
+cd ..
 {% endhighlight %}
 
-Then, download the libraries:
+Then, when you've left the CMUCLTK directory, download the following libraries:
 
 {% highlight bash %}
 wget http://www.cs.nyu.edu/~allauzen/openfst/openfst-1.3.4.tar.gz
@@ -291,7 +292,7 @@ cd g014b2b/
 ./compile-fst.sh
 {% endhighlight %}
 
-Finally, rename a folder:
+Finally, rename the following folder for convenience:
 
 {% highlight bash %}
 mv ~/g014b2b ~/phonetisaurus
