@@ -170,7 +170,7 @@ cd ..
 Then, when you've left the CMUCLTK directory, download the following libraries:
 
 {% highlight bash %}
-wget http://www.cs.nyu.edu/~allauzen/openfst/openfst-1.3.4.tar.gz
+wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
 wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
 wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
 wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
