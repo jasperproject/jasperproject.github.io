@@ -8,13 +8,26 @@ Using Jasper
 ===
 
 
-<h2 class="linked" id='selecting-network'><a href="#selecting-network" title="Permalink to this headline">Selecting a wireless network</a></h2>
+<h2 class="linked" id='selecting-network'><a href="#selecting-network" title="Permalink to this headline">Selecting a network</a></h2>
 
-When you turn on Jasper for the first time, it will ask you to configure a new wireless network connection. From your laptop, connect to the temporary "Jasper" network that will appear after a few minutes.
+When you turn on Jasper for the first time, it will ask you to configure a new network connection. You have two options for connecting to a network: (1) ethernet, and (2) wireless.
 
-After connecting to Jasper's temporary network, browse to [192.168.1.1:8000/cgi-bin/index.cgi](http://192.168.1.1:8000/cgi-bin/index.cgi) and follow the on-screen instructions. When complete, your Jasper will restart and connect to your selected wireless network automatically.
+(1) To configure an ethernet connection, simply attach your Raspberry Pi to the wired network with an ethernet cable. If network access is provided through another computer, you may need to configure that host to route network traffic through the ethernet cable. Instructions for how to do this on OS X can be found [here](http://edmundofuentes.com/post/45179343394/raspberry-pi-without-keyboard-mouse-nor-screen).
 
-To change the wireless network in the future, just turn on your Jasper without the wifi adapter, wait a few minutes, then restart Jasper with the wifi adapter plugged in. Jasper will again ask you to select a wireless network and you can just follow the steps outlined above.
+(2) To configure a wireless connection, overwrite `/etc/network/interfaces` file on your Raspberry Pi with the following code. Slightly different configuration options may be required for different types of wireless networks.
+
+{% highlight bash %}
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+auto wlan0
+iface wlan0 inet dhcp
+        wpa-ssid "YOUR_NETWORK_SSID"
+        wpa-psk "YOUR_NETWORK_PASSWORD"
+{% endhighlight %}
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 

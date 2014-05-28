@@ -148,66 +148,6 @@ sudo make install
 
 Once the installations are complete, restart your Pi.
 
-<h2 class="linked" id='configure-wireless'><a href="#configure-wireless" title="Permalink to this headline">Configure Wireless</a></h2>
-
-To configure wireless access, first install the following libraries:
-
-{% highlight bash %}
-sudo apt-get install dhcp3-server hostapd udhcpd
-{% endhighlight %}
-
-Next, insert the following lines to the end of /etc/dhcp/dhcpd.conf:
-
-{% highlight bash %}
-ddns-update-style interim;
-default-lease-time 600;
-max-lease-time 7200;
-authoritative;
-log-facility local7;
-subnet 192.168.1.0 netmask 255.255.255.0 {
-  range 192.168.1.5 192.168.1.150;
-}
-{% endhighlight %}
-
-And the following to the end of /etc/udhcpd.conf:
-
-{% highlight bash %}
-start 192.168.42.2 # This is the range of IPs that the hostspot will give to client devices.
-end 192.168.42.20
-interface wlan0 # The device uDHCP listens on.
-remaining yes
-opt dns 8.8.8.8 4.2.2.2 # The DNS servers client devices will use.
-opt subnet 255.255.255.0
-opt router 192.168.42.1 # The Pi's IP address on wlan0 which we will set up shortly.
-opt lease 864000 # 10 day DHCP lease time in seconds
-{% endhighlight %}
-
-Comment this line in sudo vim /etc/default/udhcpd:
-
-{% highlight bash %}
-#DHCPD_ENABLED="no"
-{% endhighlight %}
-
-Then run:
-
-{% highlight bash %}
-sudo ifconfig wlan0 192.168.42.1
-{% endhighlight %}
-
-Run `crontab -e`, then add the following line:
-
-{% highlight bash %}
-*/1 * * * * ping -c 1 google.com
-{% endhighlight %}
-
-Set permissions:
-
-{% highlight bash %}
-sudo chmod 777 /etc/network/interfaces
-{% endhighlight %}
-
-That's it! Next, we will install some binaries that Jasper requires.
-
 <h2 class="linked" id='install-binaries'><a href="#install-binaries" title="Permalink to this headline">Install CMUCLMTK, OpenFST, MIT Language Modeling Toolkit, m2m-aligner, Phonetisaurus</a></h2>
 
 Note that some of these installation steps take more time to complete than previous steps.
@@ -215,7 +155,7 @@ Note that some of these installation steps take more time to complete than previ
 Begin by installing some dependencies:
 
 {% highlight bash %}
-sudo apt-get install subversion autoconf libtool automake gfortran --yes
+sudo apt-get install subversion autoconf libtool automake gfortran g++ --yes
 {% endhighlight %}
 
 Next, move into your home (or Jasper) directory to check out and install CMUCLMTK:
@@ -230,7 +170,7 @@ cd ..
 Then, when you've left the CMUCLTK directory, download the following libraries:
 
 {% highlight bash %}
-wget http://www.cs.nyu.edu/~allauzen/openfst/openfst-1.3.4.tar.gz
+wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
 wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
 wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
 wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
@@ -459,7 +399,7 @@ Upon restarting your Jasper, you should be able to issue a "Spotify" command tha
 
 Having installed the required libraries, it is worth taking a moment to understand how they interact and how the client code is architected.
 
-Jasper utilizes a number of open source libraries to function. [Pocketsphinx](http://cmusphinx.sourceforge.net/2010/03/pocketsphinx-0-6-release/) performs speech recognition via Python bindings to the [CMUSphinx](http://cmusphinx.sourceforge.net) engine. Jasper’s voice is owed to the popular TTS program, [eSpeak](http://espeak.sourceforge.net). [Phonetisaurus](https://code.google.com/p/phonetisaurus/) and CMUCLMTK enable Jasper to generate dictionaries and language models on-the-fly based on the custom module vocabularies. HostAPD helps to broadcast an ad-hoc wireless network to assist wifi configuration. Mopidy enables streaming from Spotify, for those users who wish to use the module.
+Jasper utilizes a number of open source libraries to function. [Pocketsphinx](http://cmusphinx.sourceforge.net/2010/03/pocketsphinx-0-6-release/) performs speech recognition via Python bindings to the [CMUSphinx](http://cmusphinx.sourceforge.net) engine. Jasper’s voice is owed to the popular TTS program, [eSpeak](http://espeak.sourceforge.net). [Phonetisaurus](https://code.google.com/p/phonetisaurus/) and CMUCLMTK enable Jasper to generate dictionaries and language models on-the-fly based on the custom module vocabularies. Mopidy enables streaming from Spotify, for those users who wish to use the module.
 
 The client architecture is organized into a number of different components:
 
