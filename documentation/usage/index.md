@@ -14,7 +14,7 @@ When you turn on Jasper for the first time, it will ask you to configure a new n
 
 (1) To configure an ethernet connection, simply attach your Raspberry Pi to the wired network with an ethernet cable. If network access is provided through another computer, you may need to configure that host to route network traffic through the ethernet cable. Instructions for how to do this on OS X can be found [here](http://edmundofuentes.com/post/45179343394/raspberry-pi-without-keyboard-mouse-nor-screen).
 
-(2) To configure a wireless connection, copy the following code to the `/etc/network/interfaces` file on your Raspberry Pi. Slightly different configuration options may be required for different types of wireless networks.
+(2) To configure a wireless connection, overwrite `/etc/network/interfaces` file on your Raspberry Pi with the following code. Slightly different configuration options may be required for different types of wireless networks.
 
 {% highlight bash %}
 auto lo
