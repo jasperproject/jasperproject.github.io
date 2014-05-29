@@ -21,12 +21,11 @@ Here are some answers to questions you may have as you configure and use Jasper.
     - As with any information requested in the profile populator, this is purely optional and will never leave the Pi. If provided, Jasper will be able to tell you when you have new emails. Additionally, Jasper will use this information to send relevant messages to your email and/or phone (e.g., links to articles that you've requested). As an alternative, consider using [Mailgun](/documentation/software/#mailgun).
 - __Why do I get a segmentation fault when running `main.py`?__
     - This question concerns the following error:
-        
-    -  `SYSTEM_ERROR: "dict.c", line 274: Failed to open dictionary file [...] No such file or directory`
 
-        `zsh: segmentation fault  python main.py`
+          SYSTEM_ERROR: "dict.c", line 274: Failed to open dictionary file [...] No such file or directory
+          zsh: segmentation fault  python main.py
 
-    - It is caused by the speech dictionary not being created during the boot process. Make sure you've [added the boot script](/documentation/software/#install-client) to crontab, then restart your Pi. If a `dictionary.dic` file is still not present in your `client/` directory, just run `~/jasper/boot/boot.py` manually to force the dictionary generation.
+      It's caused by the speech dictionary not being created during the boot process. Make sure you've [added the boot script](/documentation/software/#install-client) to crontab, then restart your Pi. If a `dictionary.dic` file is still not present in your `client/` directory, just run `~/jasper/boot/boot.py` manually to force the dictionary generation.
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 
@@ -42,14 +41,12 @@ Here are some answers to questions you may have as you configure and use Jasper.
 <h2 class="linked" id='developing'><a href="#developing" title="Permalink to this headline">Developing on Jasper</a></h2>
 
 - __What if my module's keywords conflict with those of another module?__
-    - In brain.py, the modules are _ordered_ in the Brain's `modules` attribute shown below. Jasper sends an input query to the first module in the list that matches the query. For example, if both the Gmail and Notifications modules accepted the input "email", Jasper would choose to send it to the Gmail module, as it comes first in the list. When developing modules with conflicting keywords, consider this module's priority vis-a-vis the others in this list.
-    
-    {% highlight python %}
-    self.modules = [
-        Gmail, Notifications, Birthday, Weather, HN, News, Time, Joke, Life]
-    {% endhighlight %}
+    - Modules are ordered using a relative priority system, so a module with higher priority will be given preference when two modules would both accept a certain input. In general, the more specific the module's `isValid` function, the higher it's priority can be, as you'll trigger fewer false positives. For more detail, see [here](/documentation/api/standard/#priorities). For an example in the code, see the ['News'](https://github.com/jasperproject/jasper-client/blob/master/client/modules/News.py) and ['Hacker News'](https://github.com/jasperproject/jasper-client/blob/master/client/modules/HN.py) modules, which would both accept the input "what's on hacker news?"; the higher priority of the ['Hacker News'](https://github.com/jasperproject/jasper-client/blob/master/client/modules/HN.py) module ensures that this input is passed to the correct module.
 
 - __Is there any way to interact with Jasper on the command-line?__
     - Yes! Try running: "python main.py --local" when SSHed into the Pi to access Jasper's command-line interface (CLI). Note that there's no need to type "Jasper" between commands when using the CLI, as you would when interacting through speech.
 - __What if my module needs more accurate information from the input text? For example, what if I need to capture a number ("one", "two", "three", etc.)? I can't list every number in the input, so what do I do?__
     - If you need more accurate speech recognition, you could modify Jasper to utilize the [AT&T speech-to-text API](https://developer.att.com/apis/speech). This will capture a larger vocabulary at the cost of being somewhat slower and rate-limited. The primary modifications would come in mic.py, which would need to change its rendering function to call the AT&T API. Alternatively, consider limiting the set of _relevant_ words that the user might say (e.g., if the user is choosing from a list of three items, just add "one", "two", and "three" to the keywords list, rather than worrying about all possible numbers).
+
+- __What if I want to contribute to Jasper?__
+    - Great! There's always work to be done. Before you get started, check out our [contributing guide](https://github.com/jasperproject/jasper-client/blob/master/CONTRIBUTING.md).
