@@ -34,7 +34,7 @@ Here are some answers to questions you may have as you configure and use Jasper.
 - __Why can't I login to my Raspberry Pi after running Jasper?__
     - Jasper's attempts to connect with a wifi network may be interfering with your attempts to make an ethernet connection. To resolve this, disconnect your wifi adapter, restart your Jasper, then plug in the ethernet cable only _after_ Jasper fails to find a wireless network.
 - __Does Jasper work with two-factor email authentication?__
-    - Unfortunately, no. If you use two-factor authentication for your Gmail, there's currently no way to integrate it with Jasper (although this would be a welcome pull request!).
+    - Sure does! You simply need to generate an application specific password especially for Jasper, and use this generated password in the setup process. See https://support.google.com/accounts/answer/185833?hl=en for more information about how to generate one.
 - __What if I don't have speakers that work with the Pi or don't want Jasper to speak out loud?__
     - I'd suggest using headphones! This is particularly useful for development, during which you might have Jasper repeating himself over and over, speaking sporadically, etc.
 
