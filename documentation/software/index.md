@@ -314,7 +314,7 @@ To enable Facebook integration, Jasper requires an API key. Unfortunately, this 
 1. Go to [https://developers.facebook.com](https://developers.facebook.com) and select 'Apps', then 'Create a new app'.
 2. Give your app a name, category, etc. The choices here are arbitrary.
 3. Go to the [Facebook Graph API Explorer](https://developers.facebook.com/tools/explorer/) and select your App from the drop down list in the top right (the default choice is 'Graph API Explorer').
-4. Hit 'Get Access Token' with the default permissions.
+4. Click 'Get Access Token' and in the popup click 'Extended Permissions' and make sure 'manage_notifications' is checked. Now click 'Get Access Token' to get your token.
 5. Take the resulting API key and add it to _profile.yml_ in the following format:
 
         ...
