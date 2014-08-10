@@ -26,6 +26,8 @@ Here are some answers to questions you may have as you configure and use Jasper.
           zsh: segmentation fault  python main.py
 
       It's caused by the speech dictionary not being created during the boot process. Make sure you've [added the boot script](/documentation/software/#install-client) to crontab, then restart your Pi. If a `dictionary.dic` file is still not present in your `client/` directory, just run `~/jasper/boot/boot.py` manually to force the dictionary generation.
+- __Can I plug in my own speech recognition engine? (Google Speech, etc)__
+    - Sure, check out the instructions in [client/stt.py](https://github.com/jasperproject/jasper-client/blob/master/client/stt.py). While Pocketsphinx is the default, an example using the Google Speech API is bundled with the client.
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 
