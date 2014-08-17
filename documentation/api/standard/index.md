@@ -122,4 +122,4 @@ Of course, as the profile is just a dictionary, it can be extended in whatever w
 
 <h2 class="linked" id='finishing-steps'><a href="#finishing-steps" title="Permalink to this headline">Finishing Steps</a></h2>
 
-When your module is complete, you can indicate to Jasper that you'd like to include it by adding an import for your module in `client/modules/__init__.py`. Jasper should then respond to the user inputs you defined as valid in `isValid(text)`.
+Jasper will automatically detect your module on restart and begin to respond to the user inputs you defined as valid in `isValid(text)`.
