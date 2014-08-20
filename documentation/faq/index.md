@@ -27,6 +27,8 @@ Here are some answers to questions you may have as you configure and use Jasper.
     - Jasper is targeted at Raspberry Pi, but people have had success porting it to other platforms. Check out these threads for more information: [OS X](https://github.com/jasperproject/jasper-client/issues/35), [Ubuntu](https://github.com/jasperproject/jasper-client/issues/20). If you'd like to share your success using another platform, just [submit a pull request](https://github.com/jasperproject/jasperproject.github.io/blob/master/documentation/faq/index.md) to add to this page.
 - __Can I plug in my own speech recognition engine? (Google Speech, etc)__
     - Sure, check out the instructions in [client/stt.py](https://github.com/jasperproject/jasper-client/blob/master/client/stt.py). While Pocketsphinx is the default, an example using the Google Speech API is bundled with the client.
+- __Does Jasper work on Raspberry Pi B+?__
+    - We haven't had a chance to try this ourselves, but it may be possible. We strongly recommend using the Model B instead.
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 
