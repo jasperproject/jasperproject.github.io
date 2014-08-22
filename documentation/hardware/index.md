@@ -11,7 +11,7 @@ Jasper is designed specifically for the Raspberry Pi (Model B) and requires some
 
 <h2 class="linked" id='complete-list'><a href="#complete-list" title="Permalink to this headline">The Complete List</a></h2>
 
-- [Raspberry Pi Model B](https://www.google.com/shopping/product/16525736034140563056). People have reported issues with Jasper on the B+, but it may be possible to get it working in the future.
+- [Raspberry Pi Model B](https://www.google.com/shopping/product/16525736034140563056). Model B+ also works, but you'll have to use Method 2 in the [Software Guide](/documentation/software/).
 - USB Microphone (we tested with [Akiro Kinobo USB Microphone](http://www.amazon.com/USB-2-0-Microphone-Recognition-Software/%20dp/B008CNZOJY/ref=sr_1_1?s=electronics))
 - [4GB SD Card](https://www.google.com/shopping/product/4813288882623522717)
 - [Ethernet Cable](https://www.google.com/search?hl=en&amp;tbm=shop&amp;q=ethernet+cable)
