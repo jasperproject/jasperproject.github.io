@@ -29,6 +29,8 @@ Here are some answers to questions you may have as you configure and use Jasper.
     - Sure, check out the instructions in [client/stt.py](https://github.com/jasperproject/jasper-client/blob/master/client/stt.py). While Pocketsphinx is the default, an example using the Google Speech API is bundled with the client.
 - __Does Jasper work on Raspberry Pi B+?__
     - Method 2 in the [Software Guide](/documentation/software/) should work. Method 1 will not work because it contains Raspberry Pi B firmware.
+- __Why do I get a kernel panic?__
+    - It might be because you're using NOOBS. Try imaging your card manually with an original Raspbian version. If that doesn't solve the problem, please do share your experience in the [Jasper Support Forum](https://groups.google.com/forum/#!forum/jasper-support-forum). 
 
 <h2 class="linked" id='interacting'><a href="#interacting" title="Permalink to this headline">Interacting with Jasper</a></h2>
 
