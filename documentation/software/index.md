@@ -258,19 +258,26 @@ sudo pip install --upgrade setuptools
 sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 
-Run `crontab -e`, then add the following line, if it's not there already:
-
-{% highlight bash %}
-@reboot /home/pi/jasper/boot/boot.sh;
-{% endhighlight %}
-
 Set permissions inside the home directory:
 
 {% highlight bash %}
 sudo chmod 777 -R *
 {% endhighlight %}
 
-Restart your Raspberry Pi. Doing so will run `boot.py`, which generates the `languagemodel.lm` file in the `client/` folder.
+<h2 class="linked" id='starting-jasper'><a href="#starting-jasper" title="Permalink to this headline">Starting the Jasper Client</a></h2>
+
+Now you can start Jasper by typing:
+{% highlight bash %}
+/home/pi/jasper/jasper.py
+{% endhighlight %}
+
+You can also start Jasper automatically on each reboot. To do that, run `crontab -e`, then add the following line, if it's not there already:
+
+{% highlight bash %}
+@reboot /home/pi/jasper/jasper.py;
+{% endhighlight %}
+
+Restart your Raspberry Pi.
 
 <h3 class="linked" id='generating-profile'><a href="#generating-profile" title="Permalink to this headline">Generating a user profile</a></h3>
 
