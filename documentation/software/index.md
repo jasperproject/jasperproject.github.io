@@ -7,16 +7,40 @@ currentpage: software
 Software Guide
 ===
 
-There are two ways to install Jasper's software on your Raspberry Pi.
+There are three ways to install Jasper on your Raspberry Pi.
 
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
 The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). Raspberry Pi B+ users can download an [unofficial disk image from here](http://www.filedropper.com/jasper-disk-imagebtar). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
 
-If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 2 may be to your liking (or, at the very least, helpful for debugging).
+If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 3 may be to your liking (or, at the very least, helpful for debugging).
 
-<h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 2: Manual Installation</a></h1>
+<h1 class="linked" id='package-manager-installation'><a href="#package-mangager-installation" title="Permalink to this headline">Method 2: Installation via Package Manger</a></h1>
+
+<h2 class="linked" id='debian-packages'><a href="#debian-packages" title="Permalink to this headline">Debian/Raspbian</a></h2>
+
+Unfortunately, there are currently no packages available for Debian or Raspbian. Please use [Method 3](#manual-installation).
+
+<h2 class="linked" id='archlinux-packages'><a href="#archlinux-packages" title="Permalink to this headline">ArchLinux/ArchLinuxARM</a></h2>
+
+If you're using ArchLinux, there are packages available in the [Arch User Repository](https://aur.archlinux.org/packages/jasper-voice-control-git/). To install them:
+{% highlight bash %}
+yaourt -S jasper-voice-control
+{% endhighlight %}
+
+You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. To use Pocketsphinx and espeak (the defaults), please also install them:
+{% highlight bash %}
+yaourt -S jasper-stt-pocketsphinx
+yaourt -S jasper-tts-espeak
+{% endhighlight %}
+
+Now you can start Jasper:
+{% highlight bash %}
+sudo systemctl start jasper-voice-control
+{% endhighlight %}
+
+<h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 3: Manual Installation</a></h1>
 
 Follow these instructions only if you wish to compile your Jasper software from scratch. These steps are unnecessary if you follow the recommended "Quick Start" instructions above.
 
