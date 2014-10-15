@@ -267,7 +267,7 @@ At this point, we've installed Jasper and all the necessary software to run it. 
 
 <h2 class="linked" id='configure-jasper'><a href="#configure-jasper" title="Permalink to this headline">Configuring the Jasper Client</a></h2>
 
-<h3 class="linked" id='install-client'><a href="#install-client" title="Permalink to this headline">Install Jasper Client</a></h3>
+<h3 class="linked" id='install-client'><a href="#install-client" title="Permalink to this headline">Install Jasper</a></h3>
 
 In the home directory of your Pi, clone the Jasper source code:
 
@@ -282,15 +282,15 @@ sudo pip install --upgrade setuptools
 sudo pip install -r jasper/client/requirements.txt
 {% endhighlight %}
 
-Set permissions inside the home directory:
+Sometimes it might be neccessary to make <tt>jasper.py</tt> executable:
 
 {% highlight bash %}
-sudo chmod 777 -R *
+chmod +x jasper/jasper.py
 {% endhighlight %}
 
-<h2 class="linked" id='starting-jasper'><a href="#starting-jasper" title="Permalink to this headline">Starting the Jasper Client</a></h2>
+<h2 class="linked" id='starting-jasper'><a href="#starting-jasper" title="Permalink to this headline">Starting Jasper</a></h2>
 
-Now you can start Jasper by typing:
+After <a href="#generating-profile">generating your profile</a>, you can start Jasper by typing:
 {% highlight bash %}
 /home/pi/jasper/jasper.py
 {% endhighlight %}
