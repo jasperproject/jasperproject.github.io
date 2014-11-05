@@ -26,7 +26,7 @@ Unfortunately, there are currently no packages available for Debian or Raspbian.
 
 If you're using ArchLinux, there are packages available in the [Arch User Repository](https://aur.archlinux.org/packages/jasper-voice-control-git/). To install them:
 {% highlight bash %}
-yaourt -S jasper-voice-control
+yaourt -S jasper-voice-control-git
 {% endhighlight %}
 
 You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. To use Pocketsphinx and espeak (the defaults), please also install them:
