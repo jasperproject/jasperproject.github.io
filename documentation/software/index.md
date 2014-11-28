@@ -12,7 +12,7 @@ There are three ways to install Jasper on your Raspberry Pi.
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). Raspberry Pi B+ users can download an [unofficial disk image from here](http://www.filedropper.com/jasper-disk-imagebtar). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
 
 If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 3 may be to your liking (or, at the very least, helpful for debugging).
 
