@@ -7,6 +7,20 @@ currentpage: usage
 Using Jasper
 ===
 
+<h2 class="linked" id='starting-jasper'><a href="#starting-jasper" title="Permalink to this headline">Starting Jasper</a></h2>
+
+After <a href="/documentation/configuration/">configuring Jasper</a>, you can start Jasper by typing:
+{% highlight bash %}
+/home/pi/jasper/jasper.py
+{% endhighlight %}
+
+You can also start Jasper automatically on each reboot. To do that, run `crontab -e`, then add the following line, if it's not there already:
+
+{% highlight bash %}
+@reboot /home/pi/jasper/jasper.py;
+{% endhighlight %}
+
+Restart your Raspberry Pi.
 
 <h2 class="linked" id='selecting-network'><a href="#selecting-network" title="Permalink to this headline">Selecting a network</a></h2>
 

@@ -1,0 +1,324 @@
+---
+title: Installation
+layout: default
+currentpage: installation
+---
+
+Software Install Guide
+===
+
+There are three ways to install Jasper on your Raspberry Pi.
+
+
+<h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
+
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here for Model B](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). There is also an unofficial image for the B+ [available here](https://groups.google.com/forum/#!topic/jasper-support-forum/xHgonA-TZYw). After imaging your SD card, skip to the section on [configuring your Jasper Client](#configure-jasper).
+
+If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 3 may be to your liking (or, at the very least, helpful for debugging).
+
+<h1 class="linked" id='package-manager-installation'><a href="#package-mangager-installation" title="Permalink to this headline">Method 2: Installation via Package Manger</a></h1>
+
+<h2 class="linked" id='debian-packages'><a href="#debian-packages" title="Permalink to this headline">Debian/Raspbian</a></h2>
+
+Unfortunately, there are currently no packages available for Debian or Raspbian. Please use [Method 3](#manual-installation).
+
+<h2 class="linked" id='archlinux-packages'><a href="#archlinux-packages" title="Permalink to this headline">ArchLinux/ArchLinuxARM</a></h2>
+
+If you're using ArchLinux, there are packages available in the [Arch User Repository](https://aur.archlinux.org/packages/jasper-voice-control-git/). To install them:
+{% highlight bash %}
+yaourt -S jasper-voice-control-git
+{% endhighlight %}
+
+You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. To use Pocketsphinx and espeak (the defaults), please also install them:
+{% highlight bash %}
+yaourt -S jasper-stt-pocketsphinx
+yaourt -S jasper-tts-espeak
+{% endhighlight %}
+
+Now you can start Jasper:
+{% highlight bash %}
+sudo systemctl start jasper-voice-control
+{% endhighlight %}
+
+<h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 3: Manual Installation</a></h1>
+
+Follow these instructions only if you wish to compile your Jasper software from scratch. These steps are unnecessary if you follow the recommended "Quick Start" instructions above.
+
+
+<h2 class="linked" id='burn-image'><a href="#burn-image" title="Permalink to this headline">Burn Raspbian image onto SD card</a></h2>
+
+We'll first clear the SD card using [GParted](http://gparted.org) on Ubuntu, but you can use an equivalent utility or operating system. In GParted: right-click on each partition of the SD card, then select 'Unmount' and 'Delete'. Apply the changes with Edit > Apply All Operations.
+
+Download Raspbian Wheezy from [http://downloads.raspberrypi.org/raspbian_latest](http://downloads.raspberrypi.org/raspbian_latest). While we've tested Jasper on the 2014-01-07 release, newer releases may also work.
+
+We'll use dd to burn the image to the disk. Obtain the address of the SD card with:
+
+{% highlight bash %}
+sudo fdisk -l
+{% endhighlight %}
+
+Our address was '/dev/mmcblk0', so the following command burns the image to the disk:
+
+{% highlight bash %}
+sudo dd if=2013-12-20-wheezy-raspbian.img of=/dev/mmcblk0 bs=2M
+{% endhighlight %}
+
+When it's done, remove your SD card, insert it into your Raspberry Pi and connect it to your computer via ethernet.
+
+<h2 class="linked" id='configure-raspbian'><a href="#configure-raspbian" title="Permalink to this headline">Configure Raspbian</a></h2>
+
+We're now going to do some basic housekeeping and install some of the required libraries. You should SSH into your Pi with a command similar to the following. The IP address usually falls in the 192.168.2.3-192.168.2.10 range.
+
+{% highlight bash %}
+ssh pi@192.168.2.3 # password (default): raspberry
+{% endhighlight %}
+
+Run the following, select to 'Expand Filesystem' and restart your Pi:
+
+{% highlight bash %}
+sudo raspi-config
+{% endhighlight %}
+
+Run the following commands to update Pi and some install some useful tools.
+
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get upgrade --yes
+sudo apt-get install vim git-core python-dev python-pip bison libasound2-dev libportaudio-dev python-pyaudio --yes
+{% endhighlight %}
+
+Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
+
+{% highlight bash %}
+sudo vim /etc/modprobe.d/alsa-base.conf
+{% endhighlight %}
+
+Change the following line:
+
+{% highlight bash %}
+options snd-usb-audio index=-2
+{% endhighlight %}
+
+To this:
+
+{% highlight bash %}
+options snd-usb-audio index=0
+{% endhighlight %}
+
+Back in the shell, run:
+
+{% highlight bash %}
+sudo alsa force-reload
+{% endhighlight %}
+
+Next, test that recording works (you may need to restart your Pi) by recording some audio with the following command:
+
+{% highlight bash %}
+arecord temp.wav
+{% endhighlight %}
+
+Make sure you have speakers or headphones connected to the audio jack of your Pi. You can play back the recorded file:
+
+{% highlight bash %}
+aplay -D hw:1,0 temp.wav
+{% endhighlight %}
+
+Add the following line to the end of ~/.bash_profile (you may need to run `touch ~/.bash_profile` if the file doesn't exist already):
+
+{% highlight bash %}
+export LD_LIBRARY_PATH="/usr/local/lib"
+source .bashrc
+{% endhighlight %}
+
+And this to your ~/.bashrc or ~/.bash_profile:
+
+{% highlight bash %}
+LD_LIBRARY_PATH="/usr/local/lib"
+export LD_LIBRARY_PATH
+PATH=$PATH:/usr/local/lib/
+export PATH
+{% endhighlight %}
+
+With that, we're ready to install Jasper.
+
+<h2 class="linked" id='install-jasper'><a href="#install-jasper" title="Permalink to this headline">Install Jasper</a></h2>
+
+In the home directory of your Pi, clone the Jasper source code:
+
+{% highlight bash %}
+git clone https://github.com/jasperproject/jasper-client.git jasper
+{% endhighlight %}
+
+Jasper requires various Python libraries that we can install in one line with:
+
+{% highlight bash %}
+sudo pip install --upgrade setuptools
+sudo pip install -r jasper/client/requirements.txt
+{% endhighlight %}
+
+Sometimes it might be neccessary to make <tt>jasper.py</tt> executable:
+
+{% highlight bash %}
+chmod +x jasper/jasper.py
+{% endhighlight %}
+
+You now installed the Jasper core software.
+
+<h2 class="linked" id='installing-dependencies'><a href="#installing-dependencies" title="Permalink to this headline">Installing dependencies</a></h2>
+
+To be able to understand what you say, Jasper still needs a Speech-to-Text (STT) engine. Jasper also needs a Text-to-Speech (TTS) engine to answer to your commands. Jasper aims to be modular and thus gives you the choice which STT/TTS engine you want to use. Depending on your choice, it may be required to install additional software.
+
+Head over to the [Configuration section](/documentation/configuration/). During configuration, you'll learn what STT/TTS engines are and chose your flavour. You can then come back here and install the required dependencies for the STT/TTS engine of your choice (if neccessary).
+
+<h3 class="linked" id='installing-sphinx'><a href="#installing-sphinx" title="Permalink to this headline">Install Dependencies for PocketSphinx STT engine</a></h3>
+
+*Note: Installing pocketsphinx will take quite some time because you need to compile some stuff from source.*
+
+Jasper can use PocketSphinx for voice recognition. If you want to use Pocketsphinx as [STT Engine](/documentation/configuration/#stt), you'll have to download and unzip the sphinxbase and pocketsphinx packages:
+
+{% highlight bash %}
+wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
+wget http://downloads.sourceforge.net/project/cmusphinx/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
+tar -zxvf sphinxbase-0.8.tar.gz
+tar -zxvf pocketsphinx-0.8.tar.gz
+{% endhighlight %}
+
+Now we build and install sphinxbase:
+
+{% highlight bash %}
+cd ~/sphinxbase-0.8/
+./configure --enable-fixed
+make
+sudo make install
+{% endhighlight %}
+
+And pocketsphinx:
+
+{% highlight bash %}
+cd ~/pocketsphinx-0.8/
+./configure
+make
+sudo make install
+{% endhighlight %}
+
+Once the installations are complete, restart your Pi.
+
+To use the Pocketsphinx STT engine, you also need to install CMUCLMTK, OpenFST,
+MIT Language Modeling Toolkit, m2m-aligner and Phonetisaurus.
+
+Begin by installing some dependencies:
+
+{% highlight bash %}
+sudo apt-get install subversion autoconf libtool automake gfortran g++ --yes
+{% endhighlight %}
+
+Next, move into your home (or Jasper) directory to check out and install CMUCLMTK:
+
+{% highlight bash %}
+svn co https://svn.code.sf.net/p/cmusphinx/code/trunk/cmuclmtk/
+cd cmuclmtk/
+sudo ./autogen.sh && sudo make && sudo make install
+cd ..
+{% endhighlight %}
+
+Then, when you've left the CMUCLTK directory, download the following libraries:
+
+{% highlight bash %}
+wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
+wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
+wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
+wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
+wget http://phonetisaurus.googlecode.com/files/g014b2b.tgz
+{% endhighlight %}
+
+Untar the downloads:
+
+{% highlight bash %}
+tar -xvf m2m-aligner-1.2.tar.gz
+tar -xvf openfst-1.3.3.tar.gz
+tar -xvf phonetisaurus-0.7.8.tgz
+tar -xvf mitlm-0.4.1.tar.gz
+tar -xvf g014b2b.tgz
+{% endhighlight %}
+
+Build OpenFST:
+
+{% highlight bash %}
+cd openfst-1.3.3/
+sudo ./configure --enable-compact-fsts --enable-const-fsts --enable-far --enable-lookahead-fsts --enable-pdt
+sudo make install # come back after a really long time
+{% endhighlight %}
+
+Build M2M:
+
+{% highlight bash %}
+cd m2m-aligner-1.2/
+sudo make
+{% endhighlight %}
+
+Build MITLMT:
+
+{% highlight bash %}
+cd mitlm-0.4.1/
+sudo ./configure
+sudo make install
+{% endhighlight %}
+
+Build Phonetisaurus:
+
+{% highlight bash %}
+cd phonetisaurus-0.7.8/
+cd src
+sudo make
+{% endhighlight %}
+
+Move some of the compiled files:
+
+{% highlight bash %}
+sudo cp ~/m2m-aligner-1.2/m2m-aligner /usr/local/bin/m2m-aligner
+sudo cp ~/phonetisaurus-0.7.8/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
+{% endhighlight %}
+
+Build Phonetisaurus model:
+
+{% highlight bash %}
+cd g014b2b/
+./compile-fst.sh
+{% endhighlight %}
+
+Finally, rename the following folder for convenience:
+
+{% highlight bash %}
+mv ~/g014b2b ~/phonetisaurus
+{% endhighlight %}
+
+At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
+
+<h3 class="linked" id='installing-espeak'><a href="#installing-espeak" title="Permalink to this headline">Install Dependencies for eSpeak TTS engine</a></h3>
+
+{% highlight bash %}
+apt-get update
+apt-get install espeak
+{% endhighlight %}
+
+<h3 class="linked" id='installing-festival'><a href="#installing-festival" title="Permalink to this headline">Install Dependencies for Festival TTS engine</a></h3>
+
+{% highlight bash %}
+apt-get update
+apt-get install festival festvox-don
+{% endhighlight %}
+
+<h3 class="linked" id='installing-pico'><a href="#installing-pico" title="Permalink to this headline">Install Dependencies for SVOX Pico TTS engine</a></h3>
+
+{% highlight bash %}
+apt-get update
+apt-get install libttspico-utils
+{% endhighlight %}
+
+<h3 class="linked" id='installing-googletts'><a href="#installing-googletts" title="Permalink to this headline">Install Dependencies for Google TTS engine</a></h3>
+
+{% highlight bash %}
+apt-get update
+apt-get install python-pymad
+pip install gTTS
+{% endhighlight %}
