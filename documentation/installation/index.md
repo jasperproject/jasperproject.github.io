@@ -162,7 +162,7 @@ Sometimes it might be neccessary to make <tt>jasper.py</tt> executable:
 chmod +x jasper/jasper.py
 {% endhighlight %}
 
-You now installed the Jasper core software.
+You've now installed the Jasper core software. If you're following Method I (Quick Start), continue with [Configuration](/documentation/configuration/). Otherwise, continue with the dependency installation below.
 
 <h2 class="linked" id='installing-dependencies'><a href="#installing-dependencies" title="Permalink to this headline">Installing dependencies</a></h2>
 
