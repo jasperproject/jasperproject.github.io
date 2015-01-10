@@ -132,9 +132,7 @@ If you change the default voice of festival, Jasper will use this voice as well.
 
 <h4 class="linked" id='pico-tts'><a href="#pico-tts" title="Permalink to this headline">Configuring the SVOX Pico TTS engine</a></h4>
 
-[Install Pico]((/documentation/installation/#installing-pico)).
-
-Then, youJust add it to your `profile.yml`:
+[Install Pico]((/documentation/installation/#installing-pico)). Then, you just add it to your `profile.yml`:
 
 {% highlight yaml %}
 tts_engine: pico-tts
