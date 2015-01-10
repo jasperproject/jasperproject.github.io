@@ -174,38 +174,46 @@ Head over to the [Configuration section](/documentation/configuration/). During 
 
 *Note: Installing pocketsphinx will take quite some time because you need to compile some stuff from source.*
 
-Jasper can use PocketSphinx for voice recognition. If you want to use Pocketsphinx as [STT Engine](/documentation/configuration/#stt), you'll have to download and unzip the sphinxbase and pocketsphinx packages:
+Jasper can use PocketSphinx for voice recognition. If you want to use Pocketsphinx as [STT Engine](/documentation/configuration/#stt), you'll have to install:
 
+- sphinxbase & pocketsphinx
+- CMUCLMTK
+- MIT Language Modeling Toolkit
+- m2m-aligner
+- OpenFST & Phonetisaurus
+
+If you're using ArchLinux, you're lucky: Just install the [according AUR package](https://aur.archlinux.org/packages/jasper-stt-pocketsphinx/) and you're done:
 {% highlight bash %}
-wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
-wget http://downloads.sourceforge.net/project/cmusphinx/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
-tar -zxvf sphinxbase-0.8.tar.gz
-tar -zxvf pocketsphinx-0.8.tar.gz
+yaourt -S jasper-stt-pocketsphinx
 {% endhighlight %}
 
-Now we build and install sphinxbase:
+Everyone else needs to install the above tools manually:
 
+<h4>Installing Sphinxbase/Pocketsphinx</h4>
+
+First, you need to install Pocketsphinx. If you're using Debian Sid (unstable) or Jessie (testing), you can just do:
 {% highlight bash %}
+sudo apt-get update
+sudo apt-get install pocketsphinx
+{% endhighlight %}
+
+If you're not using Debian Sid/Jessie, you need to compile and install them from source:
+{% highlight bash %}
+wget http://downloads.sourceforge.net/project/cmusphinx/sphinxbase/0.8/sphinxbase-0.8.tar.gz
+tar -zxvf sphinxbase-0.8.tar.gz
 cd ~/sphinxbase-0.8/
 ./configure --enable-fixed
 make
 sudo make install
-{% endhighlight %}
-
-And pocketsphinx:
-
-{% highlight bash %}
+wget http://downloads.sourceforge.net/project/cmusphinx/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
+tar -zxvf pocketsphinx-0.8.tar.gz
 cd ~/pocketsphinx-0.8/
 ./configure
 make
 sudo make install
 {% endhighlight %}
 
-Once the installations are complete, restart your Pi.
-
-To use the Pocketsphinx STT engine, you also need to install CMUCLMTK, OpenFST,
-MIT Language Modeling Toolkit, m2m-aligner and Phonetisaurus.
-
+<h4>Installing CMUCLMTK</h4>
 Begin by installing some dependencies:
 
 {% highlight bash %}
@@ -223,12 +231,23 @@ cd ..
 
 Then, when you've left the CMUCLTK directory, download the following libraries:
 
+<h4>Installing Phonetisaurus, m2m-aligner and MITLM</h4>
+
+To use the Pocketsphinx STT engine, you also need to install MIT Language Modeling Toolkit, m2m-aligner and Phonetisaurus (and thus OpenFST).
+
+On Debian, you can install these from the `experimental` repository:
+sudo su -c "echo 'deb http://ftp.debian.org/debian experimental main contrib non-free' > /etc/apt/sources.list.d/experimental.list"
+sudo apt-get update
+sudo apt-get -t experimental install phonetisaurus m2m-aligner mitlm
+{% endhighlight %}
+
+If you're not using Debian, perform these steps:
+
 {% highlight bash %}
 wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
 wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
 wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
 wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
-wget http://phonetisaurus.googlecode.com/files/g014b2b.tgz
 {% endhighlight %}
 
 Untar the downloads:
@@ -238,7 +257,6 @@ tar -xvf m2m-aligner-1.2.tar.gz
 tar -xvf openfst-1.3.3.tar.gz
 tar -xvf phonetisaurus-0.7.8.tgz
 tar -xvf mitlm-0.4.1.tar.gz
-tar -xvf g014b2b.tgz
 {% endhighlight %}
 
 Build OpenFST:
@@ -279,11 +297,19 @@ sudo cp ~/m2m-aligner-1.2/m2m-aligner /usr/local/bin/m2m-aligner
 sudo cp ~/phonetisaurus-0.7.8/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
 {% endhighlight %}
 
+<h4>Building the Phonetisaurus FST model</h4>
+
+{% highlight bash %}
+wget http://phonetisaurus.googlecode.com/files/g014b2b.tgz
+tar -xvf g014b2b.tgz
+{% endhighlight %}
+
 Build Phonetisaurus model:
 
 {% highlight bash %}
 cd g014b2b/
 ./compile-fst.sh
+cd ..
 {% endhighlight %}
 
 Finally, rename the following folder for convenience:
@@ -292,33 +318,59 @@ Finally, rename the following folder for convenience:
 mv ~/g014b2b ~/phonetisaurus
 {% endhighlight %}
 
+Once the installations are complete, restart your Pi.
+
 At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
 
 <h3 class="linked" id='installing-espeak'><a href="#installing-espeak" title="Permalink to this headline">Install Dependencies for eSpeak TTS engine</a></h3>
 
+On Arch Linux, install [`jasper-tts-espeak` from the AUR](https://aur.archlinux.org/packages/jasper-tts-espeak/):
 {% highlight bash %}
-apt-get update
-apt-get install espeak
+yaourt -S jasper-tts-espeak
+{% endhighlight %}
+
+On Debian, install the `espeak` package:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install espeak
 {% endhighlight %}
 
 <h3 class="linked" id='installing-festival'><a href="#installing-festival" title="Permalink to this headline">Install Dependencies for Festival TTS engine</a></h3>
 
+On Arch Linux, install [`jasper-tts-festival` from the AUR](https://aur.archlinux.org/packages/jasper-tts-festival/):
 {% highlight bash %}
-apt-get update
-apt-get install festival festvox-don
+yaourt -S jasper-tts-festival
+{% endhighlight %}
+
+On Debian, install `festival` and `festvox-don`:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install festival festvox-don
 {% endhighlight %}
 
 <h3 class="linked" id='installing-pico'><a href="#installing-pico" title="Permalink to this headline">Install Dependencies for SVOX Pico TTS engine</a></h3>
 
+On Arch Linux, install [`jasper-tts-pico` from the AUR](https://aur.archlinux.org/packages/jasper-tts-pico/):
 {% highlight bash %}
-apt-get update
-apt-get install libttspico-utils
+yaourt -S jasper-tts-pico
+{% endhighlight %}
+
+On Debian, you need to install `libttspico-utils`:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install libttspico-utils
 {% endhighlight %}
 
 <h3 class="linked" id='installing-googletts'><a href="#installing-googletts" title="Permalink to this headline">Install Dependencies for Google TTS engine</a></h3>
 
+On Arch Linux, install [`jasper-tts-google` from the AUR](https://aur.archlinux.org/packages/jasper-tts-google/):
 {% highlight bash %}
-apt-get update
-apt-get install python-pymad
-pip install gTTS
+yaourt -S jasper-tts-google
+{% endhighlight %}
+
+On Debian, you need to install `python-pymad` via APT and `gTTS` via PIP:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install python-pymad
+sudo pip install --upgrade gTTS
 {% endhighlight %}
