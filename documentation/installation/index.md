@@ -29,15 +29,18 @@ If you're using ArchLinux, there are packages available in the [Arch User Reposi
 yaourt -S jasper-voice-control-git
 {% endhighlight %}
 
-You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. To use Pocketsphinx and espeak (the defaults), please also install them:
-{% highlight bash %}
-yaourt -S jasper-stt-pocketsphinx
-yaourt -S jasper-tts-espeak
-{% endhighlight %}
+You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. Check out the configuration section to learn what STT/TTS engines are and what you need to do to use them.
 
-Now you can start Jasper:
+After you've done that, you can start Jasper as a systemd service:
 {% highlight bash %}
 sudo systemctl start jasper-voice-control
+{% endhighlight %}
+
+If the systemd service keeps failing, your audio device might already be in use by MPD, Pulseaudio, your Desktop Environment or some other process. In this case, start Jasper as your current user:
+{% highlight bash %}
+mkdir -p ~/.jasper
+cp -r /var/lib/jasper/.jasper/profile.yml ~/.jasper
+jasper-voice-control
 {% endhighlight %}
 
 <h1 class="linked" id='manual-installation'><a href="#manual-installation" title="Permalink to this headline">Method 3: Manual Installation</a></h1>
