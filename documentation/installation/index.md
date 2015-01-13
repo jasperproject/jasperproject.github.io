@@ -27,6 +27,7 @@ Unfortunately, there are currently no packages available for Debian or Raspbian.
 If you're using ArchLinux, there are packages available in the [Arch User Repository](https://aur.archlinux.org/packages/jasper-voice-control-git/). To install them:
 {% highlight bash %}
 yaourt -S jasper-voice-control-git
+yaourt -S jasper-plugins
 {% endhighlight %}
 
 You'll also need a Text-to-Speech (TTS) and a Speech-to-Text (STT) engine. Check out the configuration section to learn what STT/TTS engines are and what you need to do to use them.
