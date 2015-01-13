@@ -94,7 +94,7 @@ witai-stt:
 A TTS engine does the exact opposite of an [STT engine](#stt): It takes written text and transforms it into speech. Jasper supports many different TTS engines that differ by voice, intonation, "roboticness" and so on.
 
 - **[eSpeak](#espeak-tts)** is a compact [open-source speech synthesizer](http://espeak.sourceforge.net/) for many platforms. Speech synthesis is done offline, but most voices can sound very "robotic".
-- **[Festival](#festival-tts)** uses the [Festival Speech Synthesis System](Festival Speech Synthesis System), an open source speech synthesizer developed by the [Centre for Speech Technology Research](http://www.cstr.ed.ac.uk/projects/festival/) at the University of Edinburgh. Like *eSpeak*, also synthesizes speech offline.
+- **[Festival](#festival-tts)** uses the [Festival Speech Synthesis System](http://www.cstr.ed.ac.uk/projects/festival/), an open source speech synthesizer developed by the Centre for Speech Technology Research at the University of Edinburgh. Like *eSpeak*, also synthesizes speech offline.
 - **[SVOX Pico TTS](#pico-tts)** was the Text-to-Speech engine used in [Android 1.6 "Donut"](http://betanews.com/2009/09/15/android-donut-sdk-released-what-s-new-inside/). It's an open-source small footprint application and also works offline. The quality is rather good compared to
 *eSpeak* and *Festival*.
 - **[Google TTS](#google-tts)** uses the same Text-to-Speech API which is also used by newer Android devices. The Synthesis itself is done on Google's servers, so that you need an active internet connection and also can't expect a lot of privacy if you use this.
