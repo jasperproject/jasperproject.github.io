@@ -95,6 +95,7 @@ A TTS engine does the exact opposite of an [STT engine](#stt): It takes written 
 
 - **[eSpeak](#espeak-tts)** is a compact [open-source speech synthesizer](http://espeak.sourceforge.net/) for many platforms. Speech synthesis is done offline, but most voices can sound very "robotic".
 - **[Festival](#festival-tts)** uses the [Festival Speech Synthesis System](http://www.cstr.ed.ac.uk/projects/festival/), an open source speech synthesizer developed by the Centre for Speech Technology Research at the University of Edinburgh. Like *eSpeak*, also synthesizes speech offline.
+- **[Flite](#flite-tts)** uses [CMU Flite (festival-lite)](http://www.festvox.org/flite/), a  lightweight and fast synthesis engine that was primarily designed for small embedded machines. It synthesizes speech offline, so not internet connection is required.
 - **[SVOX Pico TTS](#pico-tts)** was the Text-to-Speech engine used in [Android 1.6 "Donut"](http://betanews.com/2009/09/15/android-donut-sdk-released-what-s-new-inside/). It's an open-source small footprint application and also works offline. The quality is rather good compared to
 *eSpeak* and *Festival*.
 - **[Google TTS](#google-tts)** uses the same Text-to-Speech API which is also used by newer Android devices. The Synthesis itself is done on Google's servers, so that you need an active internet connection and also can't expect a lot of privacy if you use this.
@@ -129,6 +130,23 @@ tts_engine: festival-tts
 {% endhighlight %}
 
 If you change the default voice of festival, Jasper will use this voice as well.
+
+<h4 class="linked" id='flite-tts'><a href="#flite-tts" title="Permalink to this headline">Configuring the Flite TTS engine</a></h4>
+
+[Install Flite]((/documentation/installation/#installing-flite)) and add it to your `profile.yml`:
+
+{% highlight yaml %}
+tts_engine: flite-tts
+{% endhighlight %}
+
+If you want to use another voice (e.g. 'slt'), specify it in your `profile.yml`:
+
+{% highlight yaml %}
+flite-tts:
+  voice: 'slt'
+{% endhighlight %}
+
+To get a list of available voices, run `flite -lv` on the command line.
 
 <h4 class="linked" id='pico-tts'><a href="#pico-tts" title="Permalink to this headline">Configuring the SVOX Pico TTS engine</a></h4>
 

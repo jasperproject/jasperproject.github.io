@@ -352,6 +352,19 @@ sudo apt-get update
 sudo apt-get install festival festvox-don
 {% endhighlight %}
 
+<h3 class="linked" id='installing-festival'><a href="#installing-flite" title="Permalink to this headline">Install Dependencies for Flite TTS engine</a></h3>
+
+On Arch Linux, install [`jasper-tts-flite` from the AUR](https://aur.archlinux.org/packages/jasper-tts-flite/):
+{% highlight bash %}
+yaourt -S jasper-tts-flite
+{% endhighlight %}
+
+On Debian, install `flite`:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install flite
+{% endhighlight %}
+
 <h3 class="linked" id='installing-pico'><a href="#installing-pico" title="Permalink to this headline">Install Dependencies for SVOX Pico TTS engine</a></h3>
 
 On Arch Linux, install [`jasper-tts-pico` from the AUR](https://aur.archlinux.org/packages/jasper-tts-pico/):
