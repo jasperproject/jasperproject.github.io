@@ -240,6 +240,7 @@ Then, when you've left the CMUCLTK directory, download the following libraries:
 To use the Pocketsphinx STT engine, you also need to install MIT Language Modeling Toolkit, m2m-aligner and Phonetisaurus (and thus OpenFST).
 
 On Debian, you can install these from the `experimental` repository:
+{% highlight bash %}
 sudo su -c "echo 'deb http://ftp.debian.org/debian experimental main contrib non-free' > /etc/apt/sources.list.d/experimental.list"
 sudo apt-get update
 sudo apt-get -t experimental install phonetisaurus m2m-aligner mitlm
