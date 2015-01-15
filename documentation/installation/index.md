@@ -327,6 +327,31 @@ Once the installations are complete, restart your Pi.
 
 At this point, we've installed Jasper and all the necessary software to run it. Before we start playing around, though, we need to configure Jasper and provide it with some basic information.
 
+<h3 class="linked" id='installing-julius'><a href="#installing-julius" title="Permalink to this headline">Install Dependencies for Julius STT engine</a></h3>
+
+On Arch Linux, install [`julius` from the `[community]` repo](https://www.archlinux.org/packages/?repo=Community&q=julius):
+{% highlight bash %}
+sudo pacman -S julius
+{% endhighlight %}
+
+If you're not using ArchLinux, you need to compile Julius manually.
+
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install build-essential zlib1g-dev flex libasound2-dev libesd0-dev libsndfile1-dev
+{% endhighlight %}
+
+Then, download the [Julius source tarball](http://sourceforge.jp/projects/julius/downloads/60273/julius-4.3.1.tar.gz/) and extract it to `~/julius`.
+
+{% highlight bash %}
+cd ~/julius
+./configure --enable-words-int
+make
+sudo make install
+{% endhighlight %}
+
+Please note that you also need an [acoustic model and a lexicon.](/documentation/configuration/#julius-stt).
+
 <h3 class="linked" id='installing-espeak'><a href="#installing-espeak" title="Permalink to this headline">Install Dependencies for eSpeak TTS engine</a></h3>
 
 On Arch Linux, install [`jasper-tts-espeak` from the AUR](https://aur.archlinux.org/packages/jasper-tts-espeak/):
