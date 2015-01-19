@@ -153,7 +153,7 @@ If you change the default voice of festival, Jasper will use this voice as well.
 
 <h4 class="linked" id='flite-tts'><a href="#flite-tts" title="Permalink to this headline">Configuring the Flite TTS engine</a></h4>
 
-[Install Flite]((/documentation/installation/#installing-flite)) and add it to your `profile.yml`:
+[Install Flite](/documentation/installation/#installing-flite) and add it to your `profile.yml`:
 
 {% highlight yaml %}
 tts_engine: flite-tts
