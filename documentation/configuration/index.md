@@ -51,7 +51,7 @@ pocketsphinx:
 
 You also need an acoustic model in HTK format. Although VoxForge offers speaker-independent models, you will have to [adapt the model and train it with you voice](http://www.voxforge.org/home/dev/acousticmodels/linux/adapt/htkjulius) to get good recognition results. Please note that we do not offer support for this step. If you need help, ask in the [respective forums](http://www.voxforge.org/home/forums). This stt engine also needs a lexicon file that maps words to phonemes and has to contain all words that Julius shall be able to recognize. A very comprehensive lexicon is the [VoxForge Lexicon](http://www.repository.voxforge1.org/downloads/SpeechCorpus/Trunk/Lexicon/VoxForge.tgz).
 
-After you created your own acoustic model, you have to specify the paths to your `hmmdefs`, `tiedlist` and lexicon file in your `profile.yml`:
+After creating your own acoustic model, you have to specify the paths to your `hmmdefs`, `tiedlist` and lexicon file in your `profile.yml`:
 
 {% highlight yaml %}
 stt_engine: julius
