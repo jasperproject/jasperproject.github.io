@@ -30,8 +30,9 @@ You need to choose which Speech-To-Text (STT) engine Jasper should use. An STT e
 - **[Google STT](#google-stt)** is the speech-to-text system by [Google](http://www.google.com/intl/en/chrome/demos/speech.html). If you have an Android smartphone, you might already be familiar with it, because it's basically the same engine that performs recognition if you say *OK, Google*. It can only transcribe a limited amount of speech a day and needs an active internet connection.
 - **[AT&T STT](#att-stt)** is a speech decoder by the telecommunications company [AT&T](http://developer.att.com/apis/speech). Like Google Speech, it also performs decoding online and thus needs an active internet connection.
 - **[Wit.ai STT](#witai-stt)** relies on the [wit.ai cloud services](https://wit.ai/) and uses crowdsourcing to train speech recognition algorithms. Like you'd expect from a cloud service, you also need an active internet connection.
+- **[Julius](#julius-stt)** is a [high-performance open source speech recognition engine](http://julius.sourceforge.jp/en_index.php). It does not need an active internet connection. Please note that you will need to train your own acoustic model, which is a very complex task that we do not provide support for. Regular users are most likely better suited with one of the other STT engines listed here.
 
-**Important:** Except *PocketSphinx*, all of the above STT engines transfer the microphone data over the internet. **If you don't want Google, Wit.ai and AT&T to be able to listen to everything you say, do not use these STT engines!** In this case, use *PocketSphinx* instead.
+**Important:** Except *PocketSphinx* and *Julius*, all of the above STT engines transfer the microphone data over the internet. **If you don't want Google, Wit.ai and AT&T to be able to listen to everything you say, do not use these STT engines!** In this case, use *PocketSphinx* instead.
 
 <h4 class="linked" id='pocketsphinx-stt'><a href="#pocketsphinx-stt" title="Permalink to this headline">Configuring the Pocketsphinx STT engine</a></h4>
 
@@ -43,6 +44,25 @@ pocketsphinx:
   fst_model: '../phonetisaurus/g014b2b.fst'                              #optional
   hmm_dir: '/usr/local/share/pocketsphinx/model/hmm/en_US/hub4wsj_sc_8k' #optional
 {% endhighlight %}
+
+<h4 class="linked" id='julius-stt'><a href="#julius-stt" title="Permalink to this headline">Configuring the Julius STT engine</a></h4>
+
+[Install julius](/documentation/installation/#installing-julius).
+
+You also need an acoustic model in HTK format. Although VoxForge offers speaker-independent models, you will have to [adapt the model and train it with you voice](http://www.voxforge.org/home/dev/acousticmodels/linux/adapt/htkjulius) to get good recognition results. Please note that we do not offer support for this step. If you need help, ask in the [respective forums](http://www.voxforge.org/home/forums). This stt engine also needs a lexicon file that maps words to phonemes and has to contain all words that Julius shall be able to recognize. A very comprehensive lexicon is the [VoxForge Lexicon](http://www.repository.voxforge1.org/downloads/SpeechCorpus/Trunk/Lexicon/VoxForge.tgz).
+
+After creating your own acoustic model, you have to specify the paths to your `hmmdefs`, `tiedlist` and lexicon file in your `profile.yml`:
+
+{% highlight yaml %}
+stt_engine: julius
+julius:
+  hmmdefs:  '/path/to/your/hmmdefs'
+  tiedlist: '/path/to/your/tiedlist'
+  lexicon:  '/path/to/your/lexicon.tgz'
+  lexicon_archive_member: 'VoxForge/VoxForgeDict' # only needed if lexicon is a tar/tar.gz archive
+{% endhighlight %}
+
+If you encounter errors or warnings like `voca_load_htkdict: line 19: triphone "r-d+v" not found`, you are trying to recognize words that contain phones are not in your acoustic model. To be able to recognize these words, you need to train them in your acoustic model.
 
 <h4 class="linked" id='google-stt'><a href="#google-stt" title="Permalink to this headline">Configuring the Google STT engine</a></h4>
 
