@@ -228,7 +228,15 @@ In slightly more detail:
            password: your_password
 6. Enjoy your notifications.
 
+<h4 class="linked" id='international-weather'><a href="#international-weather" title="Permalink to this headline">Non-US weather data</a></h4>
+If you want to use the Weather module, but you don't live in the US, [find out the WMO ID of you local weather station](http://www.wunderground.com/about/faq/international_cities.asp) (last column of the table). The WMO ID is a unique number to identify weather stations and is issued by the [World Meteorological Organization (WMO)](https://www.wmo.int/pages/index_en.html).
 
+Then, add the WMO ID to your profile:
+{% highlight yaml %}
+wmo_id: 10410    #if you live in Essen (Germany) or surrounding area
+{% endhighlight %}
+
+If both `location` and `wmo_id` are in your `profile.yml`, the `wmo_id` takes precedence.
 
 <h4 class="linked" id='facebook-tokens'><a href="#facebook-tokens" title="Permalink to this headline">Facebook tokens</a></h4>
 
