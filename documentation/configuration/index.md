@@ -18,7 +18,7 @@ cd ~/jasper/client
 python populate.py
 {% endhighlight %}
 
-The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. The resulting profile will be stored as a [YML](http://fdik.org/yml/) file at _profile.yml_.
+The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. By default, the resulting profile will be stored as a [YML](http://fdik.org/yml/) file at `~/.jasper/profile.yml`.
 
 **Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional and will never leave the device. This password allows Jasper to report on incoming emails _and_ send you text or email notifications, but be aware that the password will be stored as plaintext in _profile.yml_. The Gmail _address_ can be entered alone (without a password) and will be used to send you notifications if you configure a Mailgun account, as described below.
 
