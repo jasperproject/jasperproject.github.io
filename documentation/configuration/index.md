@@ -170,7 +170,7 @@ To get a list of available voices, run `flite -lv` on the command line.
 
 <h4 class="linked" id='pico-tts'><a href="#pico-tts" title="Permalink to this headline">Configuring the SVOX Pico TTS engine</a></h4>
 
-[Install Pico]((/documentation/installation/#installing-pico)). Then, you just add it to your `profile.yml`:
+[Install Pico](/documentation/installation/#installing-pico) Then, you just add it to your `profile.yml`:
 
 {% highlight yaml %}
 tts_engine: pico-tts
@@ -179,7 +179,7 @@ tts_engine: pico-tts
 
 <h4 class="linked" id='google-tts'><a href="#google-tts" title="Permalink to this headline">Configuring the Google TTS engine</a></h4>
 
-[Install the required dependencies](/documentation/installation/#installing-googletts)) for Google TTS. Then set `google-tts` as you TTS engine in your `profile.yml`:
+[Install the required dependencies](/documentation/installation/#installing-googletts) for Google TTS. Then set `google-tts` as you TTS engine in your `profile.yml`:
 
 {% highlight yaml %}
 tts_engine: google-tts
