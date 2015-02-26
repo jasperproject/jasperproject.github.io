@@ -16,4 +16,4 @@ for events, and it lets you add an event to your calendar.
 
 - [Evernote](https://github.com/JasonTwente/Jasper-Evernote) -- The Evernote module lets you store notes for you in your Evernote account.
 
-- [WolframAlpha](https://github.com/nexhero/wolframalpha_jasper) -- The WolframAlpha module lets you ask question to WolframApha search engine.
+- [WolframAlpha](https://github.com/nexhero/wolframalpha_jasper) -- The WolframAlpha module lets you ask question to WolframAlpha search engine.
