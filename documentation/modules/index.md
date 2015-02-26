@@ -15,3 +15,5 @@ for events, and it lets you add an event to your calendar.
 - [Twitter](https://github.com/marclave/Jasper-Twitter) -- The Twitter module lets you tweet, check whats trending and check for any twitter notifications which include: Direct messages, retweets or mentions.
 
 - [Evernote](https://github.com/JasonTwente/Jasper-Evernote) -- The Evernote module lets you store notes for you in your Evernote account.
+
+- [WolframAlpha](https://github.com/nexhero/wolframalpha_jasper) -- The WolframAlpha module lets you ask question to WolframApha search engine.
