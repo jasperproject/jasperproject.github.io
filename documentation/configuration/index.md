@@ -141,7 +141,7 @@ espeak-tts:
   words_per_minute: 160 # optional
 {% endhighlight %}
 
-<h4 class="linked" id='festival-tts'><a href="#festival-tts" title="Permalink to this headline">Configuring the Festival STT engine</a></h4>
+<h4 class="linked" id='festival-tts'><a href="#festival-tts" title="Permalink to this headline">Configuring the Festival TTS engine</a></h4>
 
 You need to [install festival (and festival's voices)](/documentation/installation/#installing-festival). If you've done that, you can set `festival-tts` as you TTS engine in your `profile.yml`:
 
