@@ -74,7 +74,7 @@ To learn how to write your own module, check out the [Developer API documentatio
 
 <h2 class="linked" id='spotify-mode'><a href="#spotify-mode" title="Permalink to this headline">Spotify Mode</a></h2>
 
-If you've [configured Spotify](/documentation/software/#spotify-integration), Jasper will enter Spotify mode with the "Music" or "Spotify" command. Here's a list of example commands you can issue while in Spotify mode:
+If you've [configured Spotify](/documentation/configuration/#spotify-integration), Jasper will enter Spotify mode with the "Music" or "Spotify" command. Here's a list of example commands you can issue while in Spotify mode:
 
 - "Play Hipster Playlist": plays playlist titled "Hipster" from your Spotify library
 - "Play": plays currently playing song
