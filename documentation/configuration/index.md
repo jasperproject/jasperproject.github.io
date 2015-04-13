@@ -34,6 +34,8 @@ You need to choose which Speech-To-Text (STT) engine Jasper should use. An STT e
 
 **Important:** Except *PocketSphinx* and *Julius*, all of the above STT engines transfer the microphone data over the internet. **If you don't want Google, Wit.ai and AT&T to be able to listen to everything you say, do not use these STT engines!** In this case, use *PocketSphinx* instead.
 
+We also do not recommend using Internet-connected STT engines for passive listening. From privacy and performance standpoints, Pocketsphinx/Julius are superior solutions.
+
 <h4 class="linked" id='pocketsphinx-stt'><a href="#pocketsphinx-stt" title="Permalink to this headline">Configuring the Pocketsphinx STT engine</a></h4>
 
 [Install the required software](/documentation/installation/#installing-sphinx). Then, locate your FST model (`g014b2b.fst`) and your Hidden Markov Model directory (`hub4wsj_sc_8k`). If the paths below are incorrect, add the correct paths to your `profile.yml`:
