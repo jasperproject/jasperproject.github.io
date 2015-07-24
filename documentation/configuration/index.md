@@ -187,6 +187,23 @@ tts_engine: pico-tts
 tts_engine: google-tts
 {% endhighlight %}
 
+<h4 class="linked" id='ivona-tts'><a href="#ivona-tts" title="Permalink to this headline">Configuring the Ivona TTS engine</a></h4>
+
+[Install the required dependencies](/documentation/installation/#installing-ivonatts) for accessing Amazon's Ivona Speech Cloud service. You'll also need to [sign up for free](https://www.ivona.com/us/account/speechcloud/creation/) to use their service. Then set `ivona-tts` as your TTS engine in your `profile.yml` and also paste your Ivona Speech Cloud keys:
+
+{% highlight yaml %}
+tts_engine: ivona-tts
+ivona-tts:
+  # Keys can be obtained via:
+  # https://www.ivona.com/us/account/speechcloud/creation/
+  access_key: 'access_key' # required
+  secret_key: 'secret_key' # required
+  voice: 'Eric' # optional, default is 'Brian'
+  region: 'eu-west' # optional, default is 'us-east'
+  speech_rate: 'medium' # optional
+  sentence_break: 400 #optional
+{% endhighlight %}
+
 <h4 class="linked" id='mary-tts'><a href="#mary-tts" title="Permalink to this headline">Configuring the Mary TTS engine</a></h4>
 
 Simply set `mary-tts` as you TTS engine in your `profile.yml`. If you want, you can also change the default server to your own MaryTTS server:
