@@ -417,3 +417,17 @@ sudo apt-get update
 sudo apt-get install python-pymad
 sudo pip install --upgrade gTTS
 {% endhighlight %}
+
+<h3 class="linked" id='installing-ivonatts'><a href="#installing-ivonatts" title="Permalink to this headline">Install Dependencies for Ivona TTS engine</a></h3>
+
+On Arch Linux, install [`jasper-tts-ivona` from the AUR](https://aur.archlinux.org/packages/jasper-tts-ivona/):
+{% highlight bash %}
+yaourt -S jasper-tts-ivona
+{% endhighlight %}
+
+On Debian, you need to install `python-pymad` via APT and `pyvona` via PIP:
+{% highlight bash %}
+sudo apt-get update
+sudo apt-get install python-pymad
+sudo pip install --upgrade pyvona
+{% endhighlight %}
