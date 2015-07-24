@@ -121,6 +121,7 @@ A TTS engine does the exact opposite of an [STT engine](#stt): It takes written 
 - **[SVOX Pico TTS](#pico-tts)** was the Text-to-Speech engine used in [Android 1.6 "Donut"](http://betanews.com/2009/09/15/android-donut-sdk-released-what-s-new-inside/). It's an open-source small footprint application and also works offline. The quality is rather good compared to
 *eSpeak* and *Festival*.
 - **[Google TTS](#google-tts)** uses the same Text-to-Speech API which is also used by newer Android devices. The Synthesis itself is done on Google's servers, so that you need an active internet connection and also can't expect a lot of privacy if you use this.
+- **[Ivona TTS](#ivona-tts)** uses Amazon's Ivona Speech Cloud service, which is used in the [Kindle Fire](http://www.engadget.com/2013/01/24/amazon-ivona/). Speech synthesis is done online, so an active internet connection and Amazon has access to everything Jasper says to you.
 - **[MaryTTS](#mary-tts)** is an open-source TTS system written in Java. You need to set up your own MaryTTS server and configure Jasper to use it. Because the server can be hosted on the same machine that runs Jasper, you do not need internet access.
 - **[Max OS X TTS](#osx-tts)** does only work if you're running Jasper on a Mac. It then uses the `say` command in MacOS to synthesize speech.
 
