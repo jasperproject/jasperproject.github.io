@@ -198,10 +198,10 @@ ivona-tts:
   # https://www.ivona.com/us/account/speechcloud/creation/
   access_key: 'access_key' # required
   secret_key: 'secret_key' # required
-  voice: 'Eric' # optional, default is 'Brian'
-  region: 'eu-west' # optional, default is 'us-east'
-  speech_rate: 'medium' # optional
-  sentence_break: 400 #optional
+  voice: 'Eric'            # optional, default is 'Brian'
+  region: 'eu-west'        # optional, default is 'us-east'
+  speech_rate: 'medium'    # optional
+  sentence_break: 400      # optional
 {% endhighlight %}
 
 <h4 class="linked" id='mary-tts'><a href="#mary-tts" title="Permalink to this headline">Configuring the Mary TTS engine</a></h4>
