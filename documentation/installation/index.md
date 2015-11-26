@@ -305,7 +305,7 @@ sudo cp ~/phonetisaurus-0.7.8/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
 <h4>Building the Phonetisaurus FST model</h4>
 
 {% highlight bash %}
-wget http://phonetisaurus.googlecode.com/files/g014b2b.tgz
+wget https://www.dropbox.com/s/kfht75czdwucni1/g014b2b.tgz
 tar -xvf g014b2b.tgz
 {% endhighlight %}
 
