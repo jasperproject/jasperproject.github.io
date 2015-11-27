@@ -19,3 +19,5 @@ for events, and it lets you add an event to your calendar.
 - [WolframAlpha](https://github.com/nexhero/wolframalpha_jasper) -- The WolframAlpha module lets you ask question to WolframAlpha search engine.
 
 - [Status](https://github.com/edouardpoitras/jasper-status) -- The Status module outputs system status information upon request.
+
+- [Movies](https://github.com/edouardpoitras/jasper-movies) -- The Movies module is used to retrieve movie information.
