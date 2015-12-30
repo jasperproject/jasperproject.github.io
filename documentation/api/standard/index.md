@@ -75,7 +75,7 @@ The `handle` method will typically make active use of the user input (i.e., `tex
 
 <h2 class="linked" id='priorities'><a href="#priorities" title="Permalink to this headline">What if user input is accepted by multiple modules?</a></h2>
 
-This is a valid concern. Say you have both the 'News' and 'Hacker News' modules installed on your Jasper device, and the user input is "What's on Hacker News?". The 'News' module accepts nay input with the (case-insensitive) string "news" in it; the 'Hacker News' module accepts any input with the (case-insensitive) string "hacker news" in it. So both would accept this input; but running more than one module is somewhat nonsensical. Which gets priority?
+This is a valid concern. Say you have both the 'News' and 'Hacker News' modules installed on your Jasper device, and the user input is "What's on Hacker News?". The 'News' module accepts any input with the (case-insensitive) string "news" in it; the 'Hacker News' module accepts any input with the (case-insensitive) string "hacker news" in it. So both would accept this input; but running more than one module is somewhat nonsensical. Which gets priority?
 
 The more reasonable choice would be to pass it to the 'Hacker News' module. Why? It has more specific requirements on accepting user input and will trigger fewer false positives. The key idea, then, is to give a higher 'priority' to modules that accept more specific user input.
 
