@@ -83,7 +83,7 @@ Run the following, select to 'Expand Filesystem' and restart your Pi:
 sudo raspi-config
 {% endhighlight %}
 
-Run the following commands to update Pi and some install some useful tools.
+Run the following commands to update Pi and install some useful tools.
 
 {% highlight bash %}
 sudo apt-get update
