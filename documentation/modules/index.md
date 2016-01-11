@@ -21,3 +21,5 @@ for events, and it lets you add an event to your calendar.
 - [Status](https://github.com/edouardpoitras/jasper-status) -- The Status module outputs system status information upon request.
 
 - [Movies](https://github.com/edouardpoitras/jasper-movies) -- The Movies module is used to retrieve movie information.
+
+- [Define](https://github.com/iamjake648/jasper-dictionary) -- The Define module is used to get definitions of words. 
