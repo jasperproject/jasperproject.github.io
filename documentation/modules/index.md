@@ -23,3 +23,5 @@ for events, and it lets you add an event to your calendar.
 - [Movies](https://github.com/edouardpoitras/jasper-movies) -- The Movies module is used to retrieve movie information.
 
 - [Define](https://github.com/iamjake648/jasper-dictionary) -- The Define module is used to get definitions of words. 
+
+- [Wiki](https://github.com/iamjake648/jasper-wiki) -- The Wiki module is used to get a Wikipedia summary of a word or phrase.
