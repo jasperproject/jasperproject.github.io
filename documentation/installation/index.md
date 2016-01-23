@@ -229,7 +229,7 @@ Next, move into your home (or Jasper) directory to check out and install CMUCLMT
 {% highlight bash %}
 svn co https://svn.code.sf.net/p/cmusphinx/code/trunk/cmuclmtk/
 cd cmuclmtk/
-sudo ./autogen.sh && sudo make && sudo make install
+./autogen.sh && make && sudo make install
 cd ..
 {% endhighlight %}
 
