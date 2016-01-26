@@ -243,7 +243,7 @@ On Debian, you can install these from the `experimental` repository:
 {% highlight bash %}
 sudo su -c "echo 'deb http://ftp.debian.org/debian experimental main contrib non-free' > /etc/apt/sources.list.d/experimental.list"
 sudo apt-get update
-sudo apt-get -t experimental install phonetisaurus m2m-aligner mitlm
+sudo apt-get -t experimental install phonetisaurus m2m-aligner mitlm libfst-tools
 {% endhighlight %}
 
 If you're not using Debian, perform these steps:
