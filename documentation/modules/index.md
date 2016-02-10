@@ -25,3 +25,5 @@ for events, and it lets you add an event to your calendar.
 - [Define](https://github.com/iamjake648/jasper-dictionary) -- The Define module is used to get definitions of words. 
 
 - [Wiki](https://github.com/iamjake648/jasper-wiki) -- The Wiki module is used to get a Wikipedia summary of a word or phrase.
+
+- [Domoticz](https://github.com/nlooije/Jasper-Domoticz) -- The Domoticz home automation module is used to issue commands to a Domoticz server using the JSON API.
