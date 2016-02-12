@@ -27,3 +27,7 @@ for events, and it lets you add an event to your calendar.
 - [Wiki](https://github.com/iamjake648/jasper-wiki) -- The Wiki module is used to get a Wikipedia summary of a word or phrase.
 
 - [Domoticz](https://github.com/nlooije/Jasper-Domoticz) -- The Domoticz home automation module is used to issue commands to a Domoticz server using the JSON API.
+
+- [Find My iPhone](https://github.com/androbwebb/jasper-find-iphone-module) -- The Find My iPhone module is used to force your phone to ring using the apple service "find my iphone"
+
+- [Yelp](https://github.com/androbwebb/jasper-yelp-module) -- The yelp module is used to find a good restaurant in a given area. The module can also answer various questions about the restaurant.
