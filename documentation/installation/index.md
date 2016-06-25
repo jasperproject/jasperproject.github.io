@@ -252,7 +252,7 @@ If you're not using Debian, perform these steps:
 wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
 wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
 wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
-wget https://phonetisaurus.googlecode.com/files/phonetisaurus-0.7.8.tgz
+wget https://phonetisaurus.googlecode.com/files/is2013-conversion.tgz
 {% endhighlight %}
 
 Untar the downloads:
@@ -260,7 +260,7 @@ Untar the downloads:
 {% highlight bash %}
 tar -xvf m2m-aligner-1.2.tar.gz
 tar -xvf openfst-1.3.3.tar.gz
-tar -xvf phonetisaurus-0.7.8.tgz
+tar -xvf is2013-conversion.tgz
 tar -xvf mitlm-0.4.1.tar.gz
 {% endhighlight %}
 
@@ -290,8 +290,7 @@ sudo make install
 Build Phonetisaurus:
 
 {% highlight bash %}
-cd phonetisaurus-0.7.8/
-cd src
+cd is2013-conversion/phonetisaurus/src
 sudo make
 {% endhighlight %}
 
