@@ -33,3 +33,7 @@ for events, and it lets you add an event to your calendar.
 - [Yelp](https://github.com/androbwebb/jasper-yelp-module) -- The yelp module is used to find a good restaurant in a given area. The module can also answer various questions about the restaurant.
 
 - [Stocks](https://github.com/dmbuchta/jasper-stocks.git) -- The stock module is used to get live stock quotes.
+
+- [OpenWeatherMap](https://github.com/G10DRAS/JasperModules.git) -- Open Weather Map API to get weather forecast.
+
+- [Currency Exchage Rate Calculator](https://github.com/G10DRAS/JasperModules.git) -- Get Xchange Rate for two Currencies.
