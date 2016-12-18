@@ -15,9 +15,9 @@ Jasper is designed specifically for the Raspberry Pi (Model B) and requires some
 - USB Microphone (we tested with [Akiro Kinobo USB Microphone](http://www.amazon.com/USB-2-0-Microphone-Recognition-Software/%20dp/B008CNZOJY/ref=sr_1_1?s=electronics))
 - [4GB SD Card](https://www.google.com/shopping/product/4813288882623522717)
 - [Ethernet Cable](https://www.google.com/search?hl=en&amp;tbm=shop&amp;q=ethernet+cable)
-- [Airlink Mini-USB Adapter](https://www.google.com/search?hl=en&tbm=shop&q=Airlink+Mini-USB+Adapter) (optional—see below)
+- [Airlink Mini-USB Adapter](https://www.google.com/search?q=Airlink+Mini-USB+Adapter) (optional—see below)
 - [Micro-USB Cable](http://www.amazon.com/Monoprice-Male-Micro-28AWG-Cable/dp/B001U3SU8U/ref=pd_sim_pc_1)
-- [USB Wall Charging Adapter](https://www.google.com/search?hl=en&tbm=shop&q=USB+wall+charger)
+- [USB Wall Charging Adapter](https://www.google.com/search?q=USB+wall+charger)
 - [Speakers that work through the Raspberry Pi audio jack (probably need to be self-powered)](https://www.google.com/shopping/product/1749789584867681205)
 
 The [Raspberry Pi Verified Peripherals List](http://elinux.org/RPi_VerifiedPeripherals) may be helpful for finding substitutes for the products recommended above.
