@@ -249,10 +249,10 @@ sudo apt-get -t experimental install phonetisaurus m2m-aligner mitlm libfst-tool
 If you're not using Debian, perform these steps:
 
 {% highlight bash %}
-wget http://distfiles.macports.org/openfst/openfst-1.3.3.tar.gz
-wget https://mitlm.googlecode.com/files/mitlm-0.4.1.tar.gz
-wget https://m2m-aligner.googlecode.com/files/m2m-aligner-1.2.tar.gz
-wget https://phonetisaurus.googlecode.com/files/is2013-conversion.tgz
+wget http://distfiles.macports.org/openfst/openfst-1.3.4.tar.gz
+wget https://github.com/mitlm/mitlm/releases/download/v0.4.1/mitlm_0.4.1.tar.gz
+wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/m2m-aligner/m2m-aligner-1.2.tar.gz
+wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phonetisaurus/is2013-conversion.tgz
 {% endhighlight %}
 
 Untar the downloads:
