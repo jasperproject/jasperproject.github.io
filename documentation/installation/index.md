@@ -12,7 +12,7 @@ There are three ways to install Jasper on your Raspberry Pi.
 
 <h1 class="linked" id='quick-start'><a href="#quick-start" title="Permalink to this headline">Method 1: Quick Start (Recommended)</a></h1>
 
-The quickest way to get up and running with Jasper is to download the pre-compiled disk image [available here for Model B](http://sourceforge.net/projects/jasperproject/files/jasper-disk-image.tar.gz/download). There is also an unofficial image for the B+ [available here](https://groups.google.com/forum/#!topic/jasper-support-forum/xHgonA-TZYw). After imaging your SD card, clone the repository and install the Python dependencies as described in [Install Jasper](#install-jasper). Then, skip to [Configuration](/documentation/configuration/).
+The quickest way to get up and running with Jasper is to download the pre-compiled disk image for the RPI2[ Available Here ](https://link.getsync.com/#f=Jasper-RPI2-Images&sz=23E8&t=2&s=DXQAWCZO3KYMMPOILRHSSOPRW3WV6OC2LNFTSYK7PCGWYZ5PAWXQ&i=CCDSRWYTOTFRBFU4TNWSIA6TILKQTAWTX&v=2.3). There is also an image for the RPI3 [ Available Here ](https://groups.google.com/forum/#!topic/jasper-support-forum/xHgonA-TZYw). After imaging your SD card, clone the repository.  The dependencies have already been installed. [Install Jasper](#install-jasper). Then, skip to [Configuration](/documentation/configuration/).
 
 If you want to understand how all of the supporting libraries are compiled on the Raspberry Pi, Method 3 may be to your liking (or, at the very least, helpful for debugging).
 
@@ -20,7 +20,7 @@ If you want to understand how all of the supporting libraries are compiled on th
 
 <h2 class="linked" id='debian-packages'><a href="#debian-packages" title="Permalink to this headline">Debian/Raspbian</a></h2>
 
-Unfortunately, there are currently no packages available for Debian or Raspbian. Please use [Method 3](#manual-installation).
+Fortunately, a member of our community has taken the time to pre-compile most of the dependencies. [ RPI-Jasper-Dependencies](https://github.com/mattcurrycom/RPI-Jasper-Dependencies)
 
 <h2 class="linked" id='archlinux-packages'><a href="#archlinux-packages" title="Permalink to this headline">ArchLinux/ArchLinuxARM</a></h2>
 
