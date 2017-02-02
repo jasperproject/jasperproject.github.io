@@ -37,3 +37,5 @@ for events, and it lets you add an event to your calendar.
 - [OpenWeatherMap](https://github.com/G10DRAS/JasperModules.git) -- Open Weather Map API to get weather forecast.
 
 - [Currency Exchage Rate Calculator](https://github.com/G10DRAS/JasperModules.git) -- Get Xchange Rate for two Currencies.
+
+- [Jasper Support Forum Posts](https://github.com/G10DRAS/JasperModules.git) -- Fetch top posts from Jasper Support Forum and speak out author and title of the post.
