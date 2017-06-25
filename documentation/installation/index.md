@@ -88,7 +88,9 @@ Run the following commands to update Pi and install some useful tools.
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
-sudo apt-get install vim git-core python-dev python-pip bison libasound2-dev libportaudio-dev python-pyaudio --yes
+sudo apt-get install vim git-core python-dev bison libasound2-dev libportaudio-dev python-pyaudio --yes
+sudo apt-get remove python-pip
+sudo easy_install pip
 {% endhighlight %}
 
 Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
