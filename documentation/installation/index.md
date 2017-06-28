@@ -88,33 +88,32 @@ Run the following commands to update Pi and install some useful tools.
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
-sudo apt-get install vim git-core python-dev bison libasound2-dev libportaudio-dev python-pyaudio --yes
+sudo apt-get install nano git-core python-dev bison libasound2-dev libportaudio-dev python-pyaudio --yes
 sudo apt-get remove python-pip
 sudo easy_install pip
 {% endhighlight %}
 
-Plug in your USB microphone. Let's open up an ALSA configuration file in vim:
+Plug in your USB microphone. Let's create an ALSA configuration file:
 
 {% highlight bash %}
-sudo vim /etc/modprobe.d/alsa-base.conf
+sudo nano /lib/modprobe.d/jasper.conf
 {% endhighlight %}
 
-Change the following line:
+Add the following lines:
 
 {% highlight bash %}
-options snd-usb-audio index=-2
+# Load USB audio before the internal soundcard
+options snd_usb_audio index=0
+options snd_bcm2835 index=1
+
+# Make sure the sound cards are ordered the correct way in ALSA
+options snd slots=snd_usb_audio,snd_bcm2835
 {% endhighlight %}
 
-To this:
+Back in the shell, restart your Pi:
 
 {% highlight bash %}
-options snd-usb-audio index=0
-{% endhighlight %}
-
-Back in the shell, run:
-
-{% highlight bash %}
-sudo alsa force-reload
+sudo shutdown -r now
 {% endhighlight %}
 
 Next, test that recording works (you may need to restart your Pi) by recording some audio with the following command:
