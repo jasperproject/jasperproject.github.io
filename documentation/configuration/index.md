@@ -44,7 +44,7 @@ We also do not recommend using Internet-connected STT engines for passive listen
 stt_engine: sphinx
 pocketsphinx:
   fst_model: '../phonetisaurus/g014b2b.fst'                              #optional
-  hmm_dir: '/usr/local/share/pocketsphinx/model/hmm/en_US/hub4wsj_sc_8k' #optional
+  hmm_dir: '/usr/share/pocketsphinx/model/hmm/en_US/hub4wsj_sc_8k' #optional
 {% endhighlight %}
 
 <h4 class="linked" id='julius-stt'><a href="#julius-stt" title="Permalink to this headline">Configuring the Julius STT engine</a></h4>
