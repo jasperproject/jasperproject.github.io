@@ -198,7 +198,7 @@ Everyone else needs to install the above tools manually:
 First, you need to install Pocketsphinx. If you're using Debian Sid (unstable) or Jessie (testing), you can just do:
 {% highlight bash %}
 sudo apt-get update
-sudo apt-get install pocketsphinx
+sudo apt-get install pocketsphinx python-pocketsphinx
 {% endhighlight %}
 
 If you're not using Debian Sid/Jessie, you need to compile and install them from source:
@@ -215,6 +215,8 @@ cd ~/pocketsphinx-0.8/
 ./configure
 make
 sudo make install
+cd ..
+sudo easy_install pocketsphinx
 {% endhighlight %}
 
 <h4>Installing CMUCLMTK</h4>
