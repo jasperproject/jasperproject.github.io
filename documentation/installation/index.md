@@ -88,7 +88,9 @@ Run the following commands to update Pi and install some useful tools.
 {% highlight bash %}
 sudo apt-get update
 sudo apt-get upgrade --yes
-sudo apt-get install nano git-core python-dev python-pip bison libasound2-dev libportaudio-dev python-pyaudio --yes
+sudo apt-get install nano git-core python-dev bison libasound2-dev libportaudio-dev python-pyaudio --yes
+sudo apt-get remove python-pip
+sudo easy_install pip
 {% endhighlight %}
 
 Plug in your USB microphone. Let's create an ALSA configuration file:
@@ -197,7 +199,7 @@ Everyone else needs to install the above tools manually:
 First, you need to install Pocketsphinx. If you're using Debian Sid (unstable) or Jessie (testing), you can just do:
 {% highlight bash %}
 sudo apt-get update
-sudo apt-get install pocketsphinx
+sudo apt-get install pocketsphinx python-pocketsphinx
 {% endhighlight %}
 
 If you're not using Debian Sid/Jessie, you need to compile and install them from source:
@@ -214,6 +216,8 @@ cd ~/pocketsphinx-0.8/
 ./configure
 make
 sudo make install
+cd ..
+sudo easy_install pocketsphinx
 {% endhighlight %}
 
 <h4>Installing CMUCLMTK</h4>
@@ -258,15 +262,15 @@ Untar the downloads:
 
 {% highlight bash %}
 tar -xvf m2m-aligner-1.2.tar.gz
-tar -xvf openfst-1.3.3.tar.gz
+tar -xvf openfst-1.3.4.tar.gz
 tar -xvf is2013-conversion.tgz
-tar -xvf mitlm-0.4.1.tar.gz
+tar -xvf mitlm_0.4.1.tar.gz
 {% endhighlight %}
 
 Build OpenFST:
 
 {% highlight bash %}
-cd openfst-1.3.3/
+cd openfst-1.3.4/
 sudo ./configure --enable-compact-fsts --enable-const-fsts --enable-far --enable-lookahead-fsts --enable-pdt
 sudo make install # come back after a really long time
 {% endhighlight %}
@@ -297,7 +301,7 @@ Move some of the compiled files:
 
 {% highlight bash %}
 sudo cp ~/m2m-aligner-1.2/m2m-aligner /usr/local/bin/m2m-aligner
-sudo cp ~/phonetisaurus-0.7.8/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
+sudo cp ~/is2013-conversion/bin/phonetisaurus-g2p /usr/local/bin/phonetisaurus-g2p
 {% endhighlight %}
 
 <h4>Building the Phonetisaurus FST model</h4>
