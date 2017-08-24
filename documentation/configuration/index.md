@@ -20,6 +20,23 @@ python populate.py
 
 The process is fairly self-explanatory: fill in the requested information, or hit 'Enter' to defer at any step. By default, the resulting profile will be stored as a [YML](http://fdik.org/yml/) file at `~/.jasper/profile.yml`.
 
+If, instead of being asked for your First Name you get the following error:
+{% highlight bash %}
+Traceback (most recent call last):
+  File "populate.py", line 146, in <module>
+    run()
+  File "populate.py", line 26, in run
+    simple_request('first_name', 'First name')
+  File "populate.py", line 19, in simple_request
+    input = raw_input(cleanVar + ": ")
+NameError: name 'raw_input' is not defined
+{% endhighlight %}
+then simply run
+{% highlight bash %}
+python2 populate.py
+{% endhighlight %}
+As this error is caused by python3.x being linked to your python executable and not python2.x
+
 **Important**: _populate.py_ will request your Gmail password. Of course, this is purely optional and will never leave the device. This password allows Jasper to report on incoming emails _and_ send you text or email notifications, but be aware that the password will be stored as plaintext in _profile.yml_. The Gmail _address_ can be entered alone (without a password) and will be used to send you notifications if you configure a Mailgun account, as described below.
 
 
