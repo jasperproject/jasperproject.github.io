@@ -37,3 +37,17 @@ for events, and it lets you add an event to your calendar.
 - [OpenWeatherMap](https://github.com/G10DRAS/JasperModules.git) -- Open Weather Map API to get weather forecast.
 
 - [Currency Exchage Rate Calculator](https://github.com/G10DRAS/JasperModules.git) -- Get Xchange Rate for two Currencies.
+
+- [MQTT](https://github.com/ArtBIT/jasper-module-mqtt) -- An MQTT client which allows you to control other MQTT enabled devices in your home.
+
+- [Reboot](https://github.com/ArtBIT/jasper-module-reboot) -- Reboot the Raspbery PI.
+
+- [Selfie](https://github.com/ArtBIT/jasper-module-selfie) -- Take a webcam photo and upload it to a predefined email.
+
+- [Shutdown](https://github.com/ArtBIT/jasper-module-shutdown) -- Shutdown the Raspberry PI.
+
+- [Speedtest](https://github.com/ArtBIT/jasper-module-speedtest) -- Run a Speedtest of your network and report back the results.
+
+- [WavPlay](https://github.com/ArtBIT/jasper-module-wavplay) -- Play a random wav file from a predefined directory.
+
+
